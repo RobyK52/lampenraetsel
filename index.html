@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1421">
+<meta name="theme-color" content="#faf9f4">
 <title>Der letzte Funkspruch – Geocache-Rätsel</title>
 <style>
 :root{--bg:#0b1421;--card:#152438;--panel:#1b2b41;--text:#edf3f5;--muted:#b1c2cd;--amber:#ffcf70;--border:#33475b;--green:#a2efcf}
@@ -12,6 +12,38 @@ main{max-width:910px;margin:auto;padding:clamp(18px,4vw,42px)}.eyebrow{font-size
 @media(max-width:540px){main{padding:16px 12px 28px}.panels{grid-template-columns:minmax(0,1fr);gap:14px}.panel{min-width:0;padding:16px 12px}.board,.title{font-size:clamp(1.2rem,5.1vw,1.8rem);letter-spacing:-.045em}.code{gap:8px}.bottom{padding:16px 12px}.digits{font-size:clamp(1.6rem,7vw,2.2rem)}.buttonrow .btn{flex:1 1 140px}.rules{padding-left:12px}.hint{overflow-wrap:anywhere}}
 @media(max-width:360px){.title{font-size:clamp(1.12rem,5vw,1.35rem)}.panel{padding:14px 10px}.board,.eyebrow{letter-spacing:.13em}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Helles Funkarchiv, geringer Farbverbrauch und guter Kontrast */
+:root{--bg:#faf9f4;--card:#ffffff;--panel:#ffffff;--text:#24313a;--muted:#4b5964;--amber:#866126;--border:#cbd2d5;--green:#216b4c}
+body{background:#faf9f4;color:var(--text)}
+.eyebrow{color:#866126}p{color:var(--muted)}strong{color:#192831}
+.panel{background:#fff;box-shadow:0 3px 10px #23313b13;border-color:#bdc7ce}
+.panel.done{border-color:#42896b}.panel .footer,.status{color:#486071}
+.panel.done .footer,.panel.done .status,.success{color:#216b4c}
+.lamp{background:#edf1f3;border-color:#99aab5;box-shadow:inset 0 2px 4px #202f3d19,0 1px 3px #202f3d12}
+.bulb{background:#aab6be;box-shadow:inset 0 2px 5px #28374733}
+.lamp.on{background:#fbf0d6;border-color:#b88c3d}
+.lamp.on .bulb{background:radial-gradient(circle at 40% 30%,#fffadf,#f3ce74 65%,#dfaa48);box-shadow:0 0 6px #e9b76080}
+.bottom{background:#fff;border-color:#bdc7ce}
+.code small{color:#59666d}.btn{background:#f2f4f4;color:#253542;border-color:#aab8bd}
+.btn:hover{background:#e9edec}.hint{background:#faf6ea;color:#283a46;border:1px solid #e0d3b4}
+.btn:focus-visible{outline:3px solid #9e7230}
+@media print{
+  @page{size:A4;margin:13mm}
+  *{-webkit-print-color-adjust:economy!important;print-color-adjust:economy!important}
+  body{background:#fff!important;color:#000!important}
+  main{padding:0;max-width:none}
+  .panel,.bottom,.hint{background:#fff!important;box-shadow:none!important;border:1px solid #aaa!important}
+  .lamp{background:#fff!important;border:2px solid #666!important;box-shadow:none!important}
+  .lamp.on{background:#fff!important;border:3px double #222!important}
+  .lamp.on .bulb{background:#fff!important;box-shadow:none!important;border:2px solid #222!important}
+  .bulb{background:#fff!important;box-shadow:none!important;border:1px solid #aaa!important}
+  .btn{display:none!important}
+  .hint{display:none!important}
+  p,.story,.rules{color:#111!important}
+  .panels{gap:10px}
+  .panel{break-inside:avoid}
+}
 </style>
 </head>
 <body>
