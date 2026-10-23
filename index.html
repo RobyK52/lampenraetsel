@@ -44,7 +44,7 @@ body{background:#faf9f4;color:var(--text)}
   .panels{gap:10px}
   .panel{break-inside:avoid}
 }
-.back-to-listing{display:none;margin-top:15px;font-weight:700}.back-to-listing.visible{display:block}.back-to-listing a{color:#256649;text-decoration:underline;text-underline-offset:3px}
+.back-to-listing{display:block;margin-top:15px;font-weight:700}.back-to-listing.visible{display:block}.back-to-listing a{color:#256649;text-decoration:underline;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -53,12 +53,12 @@ body{background:#faf9f4;color:var(--text)}
 <h1 class="title">Der letzte Funkspruch</h1>
 <div class="story"><p>Hinter einer zugemauerten Tür wurden zwei Schalttafeln eines alten Funkraums entdeckt. Auf einem vergilbten Zettel steht:</p>
 <p><strong>«Wenn auf beiden Schalttafeln alle Lichter erloschen sind, geben sie den geheimen Funkspruch preis. Die Lampen zeigen den Weg – doch erst die vollständige Dunkelheit enthüllt die Nachricht.»</strong></p></div>
-<div class="rules"><p>Berühre ein Licht: <strong>Es selbst und seine direkten Nachbarn</strong> (oben, unten, links, rechts) wechseln ihren Zustand.</p><p>Dein Ziel ist es, <strong>beide Tafeln vollständig dunkel</strong> zu schalten.</p><p><strong>Sobald alle Lampen einer Schalttafel erloschen sind, erscheinen darunter drei verschlüsselte Geheimwörter.</strong></p></div>
+<div class="rules"><p>Berühre ein Licht: <strong>Es selbst und seine direkten Nachbarn</strong> (oben, unten, links, rechts) wechseln ihren Zustand.</p><p>Dein Ziel ist es, <strong>beide Tafeln vollständig dunkel</strong> zu schalten.</p><p><strong>Sobald alle Lampen beider Schalttafeln erloschen sind, erscheint der verschlüsselte Funkspruch aus sechs Wörtern.</strong></p></div>
 <section class="panels" aria-label="Die zwei Schalttafeln">
 <article class="panel" id="north-panel"><div class="head"><h2>✦ Schalttafel 1</h2><span class="status" id="north-status"></span></div><div class="board" id="north-board" aria-label="Schalttafel 1"></div><div class="footer" id="north-footer"></div></article>
 <article class="panel" id="east-panel"><div class="head"><h2>✦ Schalttafel 2</h2><span class="status" id="east-status"></span></div><div class="board" id="east-board" aria-label="Schalttafel 2"></div><div class="footer" id="east-footer"></div></article>
 </section>
-<section class="bottom"><div class="code"><div><small>Geheimer Funkspruch</small><div class="digits" id="code" aria-live="polite">Noch nicht empfangen</div></div><div id="result-text">Wenn alle Lampen dunkel sind</div></div><p class="back-to-listing" id="back-to-listing"><a href="https://coord.info/GCBZJCH" target="_blank" rel="noopener noreferrer">← Zurück zum Geocaching-Listing</a></p><div class="buttonrow"><button class="btn" id="reset" type="button">↻ Neu beginnen</button><button class="btn" id="hint" type="button" aria-expanded="false">⌁ Hinweis anzeigen</button></div><div class="hint" id="hint-text"><strong>💡 Hinweis zur Schaltung</strong><p>Jeder Tastendruck verändert die angeklickte Lampe und ihre direkten Nachbarn.</p><p>Drückst du dieselbe Taste zweimal, heben sich diese beiden Tastendrücke gegenseitig auf – <strong>auch wenn du dazwischen andere Tasten gedrückt hast.</strong></p><p>Beispiel: Mitte → Mitte rechts → Mitte ergibt denselben Lampenzustand wie nur Mitte rechts.</p><p><strong>Sobald alle Lampen einer Schalttafel erloschen sind, erscheinen darunter drei verschlüsselte Geheimwörter.</strong></p></div></section>
+<section class="bottom"><div class="code"><div><small>Geheimer Funkspruch</small><div class="digits" id="code" aria-live="polite">Noch nicht empfangen</div></div><div id="result-text">Wenn alle Lampen dunkel sind</div></div><p class="back-to-listing" id="back-to-listing"><a href="https://coord.info/GCBZJCH" target="_blank" rel="noopener noreferrer">← Zurück zum Geocaching-Listing</a></p><div class="buttonrow"><button class="btn" id="reset" type="button">↻ Neu beginnen</button><button class="btn" id="hint" type="button" aria-expanded="false">⌁ Hinweis anzeigen</button></div><div class="hint" id="hint-text"><strong>💡 Hinweis zur Schaltung</strong><p>Jeder Tastendruck verändert die angeklickte Lampe und ihre direkten Nachbarn.</p><p>Drückst du dieselbe Taste zweimal, heben sich diese beiden Tastendrücke gegenseitig auf – <strong>auch wenn du dazwischen andere Tasten gedrückt hast.</strong></p><p>Beispiel: Mitte → Mitte rechts → Mitte ergibt denselben Lampenzustand wie nur Mitte rechts.</p><p><strong>Sobald alle Lampen beider Schalttafeln erloschen sind, erscheint der verschlüsselte Funkspruch aus sechs Wörtern.</strong></p></div></section>
 
 <div class="live" role="status" aria-live="polite" id="live"></div>
 </main>
@@ -71,7 +71,7 @@ function begin(){state={north:{lights:[...initial.north],pressed:Array(9).fill(0
 function push(which,index){const board=state[which];board.pressed[index]^=1;const r=Math.floor(index/3),c=index%3;for(let k=0;k<9;k++){const rr=Math.floor(k/3),cc=k%3;if(Math.abs(rr-r)+Math.abs(cc-c)<=1)board.lights[k]^=1}render()}
 function solved(which){return state[which].lights.every(v=>v===0)}
 function decode(which){const p=state[which].pressed;return [0,1,2].map(r=>4*p[r*3]+2*p[r*3+1]+p[r*3+2]).join('')}
-const messages={north:'NHZ QYLQCB NXO',east:'WMTCI WQH LGI'};
+const messages={north:'HLW BHMLLA BHB',east:'MKBYS YYH IIO'};
 function render(){
   for(const which of ['north','east']){
     const b=state[which],root=document.getElementById(which+'-board');
@@ -90,16 +90,16 @@ function render(){
     const count=b.lights.reduce((sum,n)=>sum+n,0),won=count===0;
     document.getElementById(which+'-status').textContent=won?'✓ Dunkel':count+' / 9 an';
     document.getElementById(which+'-panel').classList.toggle('done',won);
-    document.getElementById(which+'-footer').textContent=won?'Drei Worte entschlüsselt: '+messages[which]:'Schalte alle Lampen aus.';
+    document.getElementById(which+'-footer').textContent=won?'✓ Tafel gelöst.':'Schalte alle Lampen aus.';
   }
   const northDone=solved('north'),eastDone=solved('east');
   const bothDone=northDone&&eastDone;
   const code=document.getElementById('code');
-  code.textContent=bothDone?'Beide Wortgruppen empfangen':'Die Wörter erscheinen unter den Schalttafeln';
+  code.textContent=bothDone?messages.north+' '+messages.east:'Noch nicht empfangen';
   code.classList.toggle('success',bothDone);
-  document.getElementById('back-to-listing').classList.toggle('visible',bothDone);
+  // Der Rücklink bleibt jederzeit sichtbar.
   document.getElementById('result-text').textContent=bothDone?'✓ Geheimer Funkspruch empfangen!':northDone||eastDone?'Eine Tafel geschafft – weiter!':'Wenn alle Lampen dunkel sind';
-  document.getElementById('live').textContent=bothDone?'Beide Tafeln gelöst. Geheimer Funkspruch: '+messages.north+' '+messages.east:northDone?'Schalttafel 1 gelöst: '+messages.north:eastDone?'Schalttafel 2 gelöst: '+messages.east:'';
+  document.getElementById('live').textContent=bothDone?'Beide Tafeln gelöst. Geheimer Funkspruch: '+messages.north+' '+messages.east:northDone?'Schalttafel 1 gelöst.':eastDone?'Schalttafel 2 gelöst.':'';
 }
 document.getElementById('reset').addEventListener('click',begin);
 document.getElementById('hint').addEventListener('click',()=>{let h=document.getElementById('hint-text');let open=h.classList.toggle('visible');document.getElementById('hint').textContent=open?'⌁ Hinweis verbergen':'⌁ Hinweis anzeigen';document.getElementById('hint').setAttribute('aria-expanded',String(open))});
