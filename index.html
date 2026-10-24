@@ -1,109 +1,396 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#faf9f4">
 <title>Der letzte Funkspruch – Geocache-Rätsel</title>
 <style>
-:root{--bg:#0b1421;--card:#152438;--panel:#1b2b41;--text:#edf3f5;--muted:#b1c2cd;--amber:#ffcf70;--border:#33475b;--green:#a2efcf}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#233e53,#0b1421 54%);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);min-height:100vh;line-height:1.5}
-main{max-width:910px;margin:auto;padding:clamp(18px,4vw,42px)}.eyebrow{font-size:.77rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);font-weight:800}.title{font-size:clamp(1.22rem,4.2vw,3.45rem);line-height:1.12;letter-spacing:-.045em;margin:.7rem 0;white-space:nowrap}p{color:var(--muted);font-size:1rem;margin:0 0 1rem}.story{max-width:690px;margin-bottom:1.5rem}strong{color:#fff}.rules{border-left:3px solid var(--amber);padding:.1rem 0 .15rem 1.1rem;margin:1.4rem 0 1.7rem}.rules p{margin:0}.panels{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{border:1px solid var(--border);border-radius:20px;padding:clamp(16px,3vw,26px);background:linear-gradient(145deg,#192a3e,#102033);box-shadow:0 14px 38px #0004;transition:border-color .2s}.panel.done{border-color:#559c84}.panel h2{margin:0;font-size:1.3rem;letter-spacing:.01em}.head{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:8px}.status{font-size:.79rem;color:#a9bfcb;font-variant-numeric:tabular-nums}.panel.done .status{color:var(--green)}.sub{font-size:.88rem;margin:0 0 18px}.board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px auto 18px;max-width:280px}.lamp{appearance:none;border:2px solid #506075;border-radius:15px;aspect-ratio:1/1;background:#26374a;box-shadow:inset 0 3px 7px #0006,0 3px 3px #0004;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .11s,border-color .15s,background .15s;touch-action:manipulation}.lamp:focus-visible{outline:3px solid #fff;outline-offset:3px}.lamp:active{transform:scale(.94)}.bulb{height:46%;aspect-ratio:1;border-radius:50%;background:#536376;box-shadow:inset 0 4px 7px #0005;transition:.2s}.lamp.on{border-color:#b78951;background:#63482d}.lamp.on .bulb{background:radial-gradient(circle at 40% 30%,#fff7c4 0%,#ffe190 34%,#ffc055 75%);box-shadow:0 0 9px 3px #ffba54a6,0 0 26px 7px #e8a3437d}.weights span{display:block;text-align:center}.panel .footer{text-align:center;min-height:26px;color:#9bb0c2;font-size:clamp(.82rem,2.3vw,1.03rem);overflow-wrap:anywhere;line-height:1.5}.panel.done .footer{color:var(--green);font-weight:700}.bottom{margin-top:22px;padding:22px;border:1px solid var(--border);border-radius:18px;background:#121f30}.code{display:flex;align-items:center;gap:20px;justify-content:space-between;flex-wrap:wrap}.code small{display:block;color:#b1c2cd;letter-spacing:.12em;text-transform:uppercase;font-size:.72rem;font-weight:800}.digits{font-size:clamp(1.7rem,4.5vw,2.7rem);font-weight:800;letter-spacing:.14em;font-variant-numeric:tabular-nums;margin-top:4px}.digits{font-size:clamp(1rem,3.3vw,1.65rem);letter-spacing:.035em;line-height:1.55;overflow-wrap:anywhere;white-space:normal}.success{color:var(--green)}.buttonrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{background:#30475d;color:#f0f5f7;border:1px solid #526a7a;border-radius:12px;padding:11px 17px;font:700 .94rem ui-sans-serif,system-ui;cursor:pointer}.btn:hover{background:#3d5970}.btn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}.hint{margin:17px 0 0;padding:15px;background:#203349;border-radius:12px;color:#e8f0f4;display:none}.hint.visible{display:block}.footnote{font-size:.84rem;margin-top:22px;opacity:.87}.live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-@media(max-width:540px){main{padding:16px 12px 28px}.panels{grid-template-columns:minmax(0,1fr);gap:14px}.panel{min-width:0;padding:16px 12px}.board,.title{font-size:clamp(1.2rem,5.1vw,1.8rem);letter-spacing:-.045em}.code{gap:8px}.bottom{padding:16px 12px}.digits{font-size:clamp(1.6rem,7vw,2.2rem)}.buttonrow .btn{flex:1 1 140px}.rules{padding-left:12px}.hint{overflow-wrap:anywhere}}
-@media(max-width:360px){.title{font-size:clamp(1.12rem,5vw,1.35rem)}.panel{padding:14px 10px}.board,.eyebrow{letter-spacing:.13em}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* Helles Funkarchiv, geringer Farbverbrauch und guter Kontrast */
-:root{--bg:#faf9f4;--card:#ffffff;--panel:#ffffff;--text:#24313a;--muted:#4b5964;--amber:#866126;--border:#cbd2d5;--green:#216b4c}
-body{background:#faf9f4;color:var(--text)}
-.eyebrow{color:#866126}p{color:var(--muted)}strong{color:#192831}
-.panel{background:#fff;box-shadow:0 3px 10px #23313b13;border-color:#bdc7ce}
-.panel.done{border-color:#42896b}.panel .footer,.status{color:#486071}
-.panel.done .footer,.panel.done .status,.success{color:#216b4c}
-.lamp{background:#edf1f3;border-color:#99aab5;box-shadow:inset 0 2px 4px #202f3d19,0 1px 3px #202f3d12}
-.bulb{background:#aab6be;box-shadow:inset 0 2px 5px #28374733}
-.lamp.on{background:#fbf0d6;border-color:#b88c3d}
-.lamp.on .bulb{background:radial-gradient(circle at 40% 30%,#fffadf,#f3ce74 65%,#dfaa48);box-shadow:0 0 6px #e9b76080}
-.bottom{background:#fff;border-color:#bdc7ce}
-.code small{color:#59666d}.btn{background:#f2f4f4;color:#253542;border-color:#aab8bd}
-.btn:hover{background:#e9edec}.hint{background:#faf6ea;color:#283a46;border:1px solid #e0d3b4}
-.btn:focus-visible{outline:3px solid #9e7230}
-@media print{
-  @page{size:A4;margin:13mm}
-  *{-webkit-print-color-adjust:economy!important;print-color-adjust:economy!important}
-  body{background:#fff!important;color:#000!important}
-  main{padding:0;max-width:none}
-  .panel,.bottom,.hint{background:#fff!important;box-shadow:none!important;border:1px solid #aaa!important}
-  .lamp{background:#fff!important;border:2px solid #666!important;box-shadow:none!important}
-  .lamp.on{background:#fff!important;border:3px double #222!important}
-  .lamp.on .bulb{background:#fff!important;box-shadow:none!important;border:2px solid #222!important}
-  .bulb{background:#fff!important;box-shadow:none!important;border:1px solid #aaa!important}
-  .btn{display:none!important}
-  .hint{display:none!important}
-  p,.story,.rules{color:#111!important}
-  .panels{gap:10px}
-  .panel{break-inside:avoid}
+:root {
+  --bg: #293845;
+  --card: #354653;
+  --text: #edf0ed;
+  --muted: #c5d1d8;
+  --gold: #e2b76c;
+  --border: #647581;
 }
-.back-to-listing{display:block;margin-top:15px;font-weight:700}.back-to-listing.visible{display:block}.back-to-listing a{color:#256649;text-decoration:underline;text-underline-offset:3px}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+main {
+  max-width: 1080px;
+  margin: auto;
+  padding: 30px 18px 55px;
+}
+.eyebrow {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+h1 {
+  color: white;
+  margin: 10px 0;
+  font-size: clamp(28px, 5vw, 40px);
+}
+h2 { margin: 0; }
+.intro {
+  color: var(--muted);
+  max-width: 850px;
+}
+.rules {
+  border-left: 4px solid var(--gold);
+  padding: 10px 18px;
+  margin: 25px 0;
+  background: #354653;
+}
+.panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 10px 28px #13202c55;
+}
+.panel.done { border-color: #8fc8ac; }
+.panelhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.panelhead h2 {
+  font-size: clamp(17px, 2.5vw, 25px);
+  text-align: left;
+}
+.count {
+  color: var(--muted);
+  white-space: nowrap;
+}
+.lights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 365px;
+  margin: auto;
+}
+.lamp {
+  aspect-ratio: 1;
+  border: 2px solid #81909c;
+  border-radius: 18px;
+  background: #27333d;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: inset 0 2px 5px #10192177;
+}
+.lamp:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+.bulb {
+  width: 44%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #667782;
+  box-shadow: inset 0 2px 6px #17212b;
+}
+.lamp.on {
+  background: #59482d;
+  border-color: var(--gold);
+}
+.lamp.on .bulb {
+  background: radial-gradient(
+    circle at 36% 28%,
+    #fffbd7 0%,
+    #ffe69a 38%,
+    #ffc257 80%
+  );
+  box-shadow: 0 0 18px #ffc25799;
+}
+.panelstatus {
+  min-height: 65px;
+  padding-top: 20px;
+  color: var(--muted);
+}
+.words {
+  color: #ffe09a;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: clamp(16px, 2.4vw, 24px);
+}
+.bottom {
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+.bottom h2 { color: var(--gold); }
+.secret {
+  font-weight: bold;
+  color: #ffe09a;
+  font-size: clamp(20px, 3vw, 30px);
+  letter-spacing: 1px;
+  overflow-wrap: anywhere;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+button.action {
+  color: var(--text);
+  background: #465a68;
+  border: 1px solid #82939c;
+  border-radius: 12px;
+  padding: 11px 18px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button.action:hover { background: #526b7b; }
+.hint {
+  display: none;
+  margin-top: 15px;
+  padding: 14px;
+  border-left: 3px solid var(--gold);
+  background: #293845;
+}
+.back {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 18px;
+  color: #1f2b35;
+  background: #e2b76c;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.back:hover { background: #f4d49a; }
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-top: 28px;
+}
+@media (max-width: 650px) {
+  .panels { grid-template-columns: 1fr; }
+  .panel { padding: 16px; }
+  .lights { max-width: 340px; }
+}
 </style>
 </head>
 <body>
 <main>
-<div class="eyebrow">Mystery-Cache · Rätselstation 01</div>
-<h1 class="title">Der letzte Funkspruch</h1>
-<div class="story"><p>Hinter einer zugemauerten Tür wurden zwei Schalttafeln eines alten Funkraums entdeckt. Auf einem vergilbten Zettel steht:</p>
-<p><strong>«Wenn auf beiden Schalttafeln alle Lichter erloschen sind, geben sie den geheimen Funkspruch preis. Die Lampen zeigen den Weg – doch erst die vollständige Dunkelheit enthüllt die Nachricht.»</strong></p></div>
-<div class="rules"><p>Berühre ein Licht: <strong>Es selbst und seine direkten Nachbarn</strong> (oben, unten, links, rechts) wechseln ihren Zustand.</p><p>Dein Ziel ist es, <strong>beide Tafeln vollständig dunkel</strong> zu schalten.</p><p><strong>Sobald alle Lampen beider Schalttafeln erloschen sind, erscheint der verschlüsselte Funkspruch aus sechs Wörtern.</strong></p></div>
-<section class="panels" aria-label="Die zwei Schalttafeln">
-<article class="panel" id="north-panel"><div class="head"><h2>✦ Schalttafel 1</h2><span class="status" id="north-status"></span></div><div class="board" id="north-board" aria-label="Schalttafel 1"></div><div class="footer" id="north-footer"></div></article>
-<article class="panel" id="east-panel"><div class="head"><h2>✦ Schalttafel 2</h2><span class="status" id="east-status"></span></div><div class="board" id="east-board" aria-label="Schalttafel 2"></div><div class="footer" id="east-footer"></div></article>
-</section>
-<section class="bottom"><div class="code"><div><small>Geheimer Funkspruch</small><div class="digits" id="code" aria-live="polite">Noch nicht empfangen</div></div><div id="result-text">Wenn alle Lampen dunkel sind</div></div><p class="back-to-listing" id="back-to-listing"><a href="https://coord.info/GCBZJCH" target="_blank" rel="noopener noreferrer">← Zurück zum Geocaching-Listing</a></p><div class="buttonrow"><button class="btn" id="reset" type="button">↻ Neu beginnen</button><button class="btn" id="hint" type="button" aria-expanded="false">⌁ Hinweis anzeigen</button></div><div class="hint" id="hint-text"><strong>💡 Hinweis zur Schaltung</strong><p>Jeder Tastendruck verändert die angeklickte Lampe und ihre direkten Nachbarn.</p><p>Drückst du dieselbe Taste zweimal, heben sich diese beiden Tastendrücke gegenseitig auf – <strong>auch wenn du dazwischen andere Tasten gedrückt hast.</strong></p><p>Beispiel: Mitte → Mitte rechts → Mitte ergibt denselben Lampenzustand wie nur Mitte rechts.</p><p><strong>Sobald alle Lampen beider Schalttafeln erloschen sind, erscheint der verschlüsselte Funkspruch aus sechs Wörtern.</strong></p></div></section>
+  <div class="eyebrow">FUNKARCHIV // AKTE 001</div>
+  <h1>Der letzte Funkspruch</h1>
 
-<div class="live" role="status" aria-live="polite" id="live"></div>
+  <p class="intro">
+    Zwei geheimnisvolle Schalttafeln haben die Jahrzehnte
+    überdauert. Ihre Lampen leuchten noch immer.
+    Doch welche Nachricht verbirgt sich dahinter?
+  </p>
+
+  <div class="rules">
+    Dein Ziel ist es, <strong>beide Tafeln vollständig dunkel</strong>
+    zu schalten. Beim Anklicken einer Lampe ändern sich
+    ihr eigener Zustand und der ihrer direkten Nachbarn
+    oben, unten, links und rechts. Diagonale Lampen
+    bleiben unverändert.
+    <p>
+      <strong>
+        Sobald beide Schalttafeln vollständig dunkel sind,
+        erscheint die verschlüsselte Funknachricht.
+      </strong>
+    </p>
+  </div>
+
+  <section class="panels">
+    <div class="panel" id="panel0">
+      <div class="panelhead">
+        <h2>✦ Schalttafel 1</h2>
+        <span class="count" id="count0">6 / 9 an</span>
+      </div>
+      <div class="lights" id="lights0"></div>
+      <div class="panelstatus" id="status0">
+        Schalte alle Lampen aus.
+      </div>
+    </div>
+
+    <div class="panel" id="panel1">
+      <div class="panelhead">
+        <h2>✦ Schalttafel 2</h2>
+        <span class="count" id="count1">6 / 9 an</span>
+      </div>
+      <div class="lights" id="lights1"></div>
+      <div class="panelstatus" id="status1">
+        Schalte alle Lampen aus.
+      </div>
+    </div>
+  </section>
+
+  <section class="bottom">
+    <div class="eyebrow">GEHEIMER FUNKSPRUCH</div>
+    <h2 id="messageTitle">
+      Die Nachricht ist noch verborgen
+    </h2>
+    <p id="messageText">
+      Erst wenn beide Schalttafeln dunkel sind,
+      wird der vollständige Funkspruch sichtbar.
+    </p>
+
+    <div class="controls">
+      <button class="action" onclick="resetGame()">
+        ↻ Neu beginnen
+      </button>
+      <button class="action" onclick="toggleHint()">
+        Hinweis anzeigen
+      </button>
+    </div>
+
+    <div class="hint" id="hint">
+      Beim Drücken einer Lampe werden nur diese
+      und ihre unmittelbaren Nachbarn umgeschaltet.
+      Überlege, welche Lampen du nur durch einen
+      bestimmten Schalter erreichen kannst.
+    </div>
+
+    <a class="back"
+       href="https://coord.info/GCBZJCH">
+      ← Zurück zum Geocaching-Listing
+    </a>
+  </section>
+
+  <div class="footer">ENDE DER ÜBERTRAGUNG</div>
 </main>
+
 <script>
-'use strict';
-const initial={north:[0,1,1,1,1,1,0,1,0],east:[1,1,0,1,1,0,0,1,1]};
-let state;
-const names={north:'Schalttafel 1',east:'Schalttafel 2'};
-function begin(){state={north:{lights:[...initial.north],pressed:Array(9).fill(0)},east:{lights:[...initial.east],pressed:Array(9).fill(0)}};render()}
-function push(which,index){const board=state[which];board.pressed[index]^=1;const r=Math.floor(index/3),c=index%3;for(let k=0;k<9;k++){const rr=Math.floor(k/3),cc=k%3;if(Math.abs(rr-r)+Math.abs(cc-c)<=1)board.lights[k]^=1}render()}
-function solved(which){return state[which].lights.every(v=>v===0)}
-function decode(which){const p=state[which].pressed;return [0,1,2].map(r=>4*p[r*3]+2*p[r*3+1]+p[r*3+2]).join('')}
-const messages={north:'HLW BHMLLA BHB',east:'MKBYS YYH IIO'};
-function render(){
-  for(const which of ['north','east']){
-    const b=state[which],root=document.getElementById(which+'-board');
-    root.replaceChildren();
-    b.lights.forEach((lit,i)=>{
-      const button=document.createElement('button');
-      button.className='lamp'+(lit?' on':'');
-      button.type='button';
-      button.setAttribute('aria-label',names[which]+': Reihe '+(Math.floor(i/3)+1)+', Spalte '+(i%3+1)+', '+(lit?'leuchtet':'dunkel'));
-      button.setAttribute('aria-pressed',String(!!lit));
-      const bulb=document.createElement('span');bulb.className='bulb';
-      button.appendChild(bulb);
-      button.addEventListener('click',()=>push(which,i));
-      root.appendChild(button);
-    });
-    const count=b.lights.reduce((sum,n)=>sum+n,0),won=count===0;
-    document.getElementById(which+'-status').textContent=won?'✓ Dunkel':count+' / 9 an';
-    document.getElementById(which+'-panel').classList.toggle('done',won);
-    document.getElementById(which+'-footer').textContent=won?'✓ Tafel gelöst.':'Schalte alle Lampen aus.';
-  }
-  const northDone=solved('north'),eastDone=solved('east');
-  const bothDone=northDone&&eastDone;
-  const code=document.getElementById('code');
-  code.textContent=bothDone?messages.north+' '+messages.east:'Noch nicht empfangen';
-  code.classList.toggle('success',bothDone);
-  // Der Rücklink bleibt jederzeit sichtbar.
-  document.getElementById('result-text').textContent=bothDone?'✓ Geheimer Funkspruch empfangen!':northDone||eastDone?'Eine Tafel geschafft – weiter!':'Wenn alle Lampen dunkel sind';
-  document.getElementById('live').textContent=bothDone?'Beide Tafeln gelöst. Geheimer Funkspruch: '+messages.north+' '+messages.east:northDone?'Schalttafel 1 gelöst.':eastDone?'Schalttafel 2 gelöst.':'';
+const initial = [
+  [0,1,1,1,1,1,0,1,0],
+  [1,1,0,1,1,0,0,1,1]
+];
+
+const secretMessage = "HLW BHMLLA BHB MKBYS YYH IIO";
+
+let boards = initial.map(board => [...board]);
+
+function isSolved(index) {
+  return boards[index].every(value => value === 0);
 }
-document.getElementById('reset').addEventListener('click',begin);
-document.getElementById('hint').addEventListener('click',()=>{let h=document.getElementById('hint-text');let open=h.classList.toggle('visible');document.getElementById('hint').textContent=open?'⌁ Hinweis verbergen':'⌁ Hinweis anzeigen';document.getElementById('hint').setAttribute('aria-expanded',String(open))});
-begin();
+
+function toggleLamp(boardIndex, lampIndex) {
+  const row = Math.floor(lampIndex / 3);
+  const col = lampIndex % 3;
+
+  const neighbors = [
+    [row, col],
+    [row - 1, col],
+    [row + 1, col],
+    [row, col - 1],
+    [row, col + 1]
+  ];
+
+  neighbors.forEach(([r, c]) => {
+    if (r >= 0 && r < 3 && c >= 0 && c < 3) {
+      const index = r * 3 + c;
+      boards[boardIndex][index] ^= 1;
+    }
+  });
+
+  render();
+}
+
+function render() {
+  boards.forEach((board, boardIndex) => {
+    const container =
+      document.getElementById("lights" + boardIndex);
+
+    container.innerHTML = "";
+
+    board.forEach((value, lampIndex) => {
+      const button = document.createElement("button");
+      button.className = "lamp" + (value ? " on" : "");
+      button.type = "button";
+      button.setAttribute(
+        "aria-label",
+        "Schalttafel " + (boardIndex + 1) +
+        ", Lampe " + (lampIndex + 1) +
+        (value ? ", eingeschaltet" : ", ausgeschaltet")
+      );
+
+      const bulb = document.createElement("span");
+      bulb.className = "bulb";
+      button.appendChild(bulb);
+
+      button.addEventListener("click", () => {
+        toggleLamp(boardIndex, lampIndex);
+      });
+
+      container.appendChild(button);
+    });
+
+    const count = board.filter(Boolean).length;
+
+    document.getElementById("count" + boardIndex)
+      .textContent = count + " / 9 an";
+
+    const solved = isSolved(boardIndex);
+
+    document.getElementById("panel" + boardIndex)
+      .classList.toggle("done", solved);
+
+    document.getElementById("status" + boardIndex)
+      .innerHTML = solved
+        ? '<span class="words">Schalttafel entschlüsselt ✓</span>'
+        : "Schalte alle Lampen aus.";
+  });
+
+  const bothSolved = isSolved(0) && isSolved(1);
+
+  document.getElementById("messageTitle")
+    .textContent = bothSolved
+      ? "Die letzte Funknachricht"
+      : "Die Nachricht ist noch verborgen";
+
+  document.getElementById("messageText")
+    .innerHTML = bothSolved
+      ? '<span class="secret">' +
+        secretMessage +
+        '</span><p>Entschlüssle diese Nachricht ' +
+        'mit deiner Papier-Enigma und gib die ' +
+        'Lösung im Checker des Listings ein.</p>'
+      : "Erst wenn beide Schalttafeln dunkel sind, " +
+        "wird der vollständige Funkspruch sichtbar.";
+}
+
+function resetGame() {
+  boards = initial.map(board => [...board]);
+  document.getElementById("hint").style.display = "none";
+  render();
+}
+
+function toggleHint() {
+  const hint = document.getElementById("hint");
+  hint.style.display =
+    hint.style.display === "block" ? "none" : "block";
+}
+
+render();
 </script>
 </body>
 </html>
