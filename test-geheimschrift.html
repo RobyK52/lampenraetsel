@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funkraum – Geheimschrift</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #293845;
+  font-family: Arial, sans-serif;
+}
+
+.funkraum {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto;
+  line-height: 0;
+}
+
+.funkraum img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.geheimnis {
+  position: absolute;
+  top: 72%;
+  left: 8%;
+  width: 84%;
+  text-align: center;
+  line-height: 1.5;
+  z-index: 2;
+  font-family: monospace;
+  font-size: clamp(14px, 2.8vw, 26px);
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: text;
+}
+
+.geheimnis::selection {
+  background: #e2b76c;
+  color: #17232d;
+  -webkit-text-fill-color: #17232d;
+}
+
+.geheimnis::-moz-selection {
+  background: #e2b76c;
+  color: #17232d;
+}
+</style>
+</head>
+<body>
+
+<div class="funkraum">
+  <img
+    src="https://raw.githubusercontent.com/RobyK52/lampenraetsel/main/Funkraum_Titelbild.png"
+    alt="Alter Funkraum">
+
+  <div class="geheimnis">HFXSV RN HXSZGGVM</div>
+</div>
+
+</body>
+</html>
