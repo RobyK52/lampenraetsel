@@ -8,366 +8,367 @@
 
 <style>
 :root {
-  --bg: #293845;
-  --panel: #354653;
-  --text: #edf0ed;
-  --muted: #c5d1d8;
-  --gold: #e2b76c;
-  --border: #647581;
+  --bg:#293845;
+  --panel:#354653;
+  --text:#edf0ed;
+  --muted:#c5d1d8;
+  --gold:#e2b76c;
+  --border:#647581;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing:border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior:smooth; }
 
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 16px/1.65 Arial, Helvetica, sans-serif;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:16px/1.65 Arial,Helvetica,sans-serif;
 }
 
 main {
-  max-width: 1080px;
-  margin: auto;
-  padding: 24px 18px 48px;
+  max-width:1080px;
+  margin:auto;
+  padding:24px 18px 48px;
 }
 
 .eyebrow {
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 2px;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:2px;
 }
 
 h1 {
-  color: #ffffff;
-  font-size: clamp(28px, 5vw, 40px);
-  margin: 8px 0 18px;
+  color:white;
+  font-size:clamp(28px,5vw,40px);
+  margin:8px 0 18px;
 }
 
-h2 { margin: 0 0 14px; }
-
-h3 { color: var(--gold); }
+h2 { margin:0 0 14px; }
+h3 { color:var(--gold); }
 
 /* FUNKRAUM-BILD */
 
 .funkraum {
-  position: relative;
-  width: 100%;
-  margin: 18px 0 24px;
-  line-height: 0;
+  position:relative;
+  width:100%;
+  margin:18px 0 24px;
+  line-height:0;
 }
 
 .funkraum img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-select: none;
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:12px;
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-select:none;
 }
 
 /* UNSICHTBARE ATBASH-BOTSCHAFT */
 
 .geheimnis {
-  position: absolute;
-  top: 65%;
-  left: 6%;
-  width: 88%;
-  z-index: 2;
-  text-align: center;
-  line-height: 1.55;
-  font-family: monospace;
-  font-size: clamp(11px, 1.8vw, 18px);
-  font-weight: bold;
-  letter-spacing: 1px;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  user-select: text;
-  -webkit-user-select: text;
-  cursor: text;
-  overflow-wrap: anywhere;
+  position:absolute;
+  top:65%;
+  left:6%;
+  width:88%;
+  z-index:2;
+  text-align:center;
+  line-height:1.55;
+  font-family:monospace;
+  font-size:clamp(11px,1.8vw,18px);
+  font-weight:bold;
+  letter-spacing:1px;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  user-select:text;
+  -webkit-user-select:text;
+  cursor:text;
+  overflow-wrap:anywhere;
 }
 
 .geheimnis::selection {
-  background: #e2b76c;
-  color: #17232d;
-  -webkit-text-fill-color: #17232d;
+  background:#e2b76c;
+  color:#17232d;
+  -webkit-text-fill-color:#17232d;
 }
 
 .geheimnis::-moz-selection {
-  background: #e2b76c;
-  color: #17232d;
+  background:#e2b76c;
+  color:#17232d;
 }
 
 /* ANLEITUNG */
 
 .rules {
-  background: var(--panel);
-  border-left: 4px solid var(--gold);
-  padding: 16px 20px;
-  margin: 24px 0;
+  background:var(--panel);
+  border-left:4px solid var(--gold);
+  padding:16px 20px;
+  margin:24px 0;
 }
 
 /* SCHALTTAFELN */
 
 .panels {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
 }
 
 .panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 22px;
-  text-align: center;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px;
+  text-align:center;
 }
 
-.panel.done { border-color: #8fc8ac; }
+.panel.done {
+  border-color:#8fc8ac;
+}
 
 .panelhead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:20px;
 }
 
 .panelhead h2 {
-  margin: 0;
-  font-size: clamp(17px, 2.5vw, 25px);
-  text-align: left;
+  margin:0;
+  font-size:clamp(17px,2.5vw,25px);
+  text-align:left;
 }
 
 .count {
-  color: var(--muted);
-  white-space: nowrap;
+  color:var(--muted);
+  white-space:nowrap;
 }
 
 .lights {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  max-width: 365px;
-  margin: auto;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  max-width:365px;
+  margin:auto;
 }
 
 .lamp {
-  aspect-ratio: 1;
-  border: 2px solid #81909c;
-  border-radius: 18px;
-  background: #27333d;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  cursor: pointer;
+  aspect-ratio:1;
+  border:2px solid #81909c;
+  border-radius:18px;
+  background:#27333d;
+  display:grid;
+  place-items:center;
+  padding:0;
+  cursor:pointer;
 }
 
 .lamp:focus-visible {
-  outline: 3px solid white;
-  outline-offset: 3px;
+  outline:3px solid white;
+  outline-offset:3px;
 }
 
 .bulb {
-  width: 44%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #667782;
-  box-shadow: inset 0 2px 6px #17212b;
+  width:44%;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:#667782;
+  box-shadow:inset 0 2px 6px #17212b;
 }
 
 .lamp.on {
-  background: #59482d;
-  border-color: var(--gold);
+  background:#59482d;
+  border-color:var(--gold);
 }
 
 .lamp.on .bulb {
-  background: radial-gradient(
+  background:radial-gradient(
     circle at 36% 28%,
     #fffbd7,
     #ffe69a 38%,
     #ffc257 80%
   );
-  box-shadow: 0 0 18px #ffc25799;
+  box-shadow:0 0 18px #ffc25799;
 }
 
 .panelstatus {
-  min-height: 65px;
-  padding-top: 20px;
-  color: var(--muted);
+  min-height:65px;
+  padding-top:20px;
+  color:var(--muted);
 }
 
 /* GEHEIMER FUNKSPRUCH */
 
 .bottom {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  margin-top: 24px;
-  padding: 24px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:20px;
+  margin-top:24px;
+  padding:24px;
 }
 
-.bottom h2 { color: var(--gold); }
+.bottom h2 { color:var(--gold); }
 
 .secret {
-  color: #ffe09a;
-  font-weight: bold;
-  font-size: clamp(20px, 3vw, 30px);
-  letter-spacing: 1px;
-  overflow-wrap: anywhere;
+  color:#ffe09a;
+  font-weight:bold;
+  font-size:clamp(20px,3vw,30px);
+  letter-spacing:1px;
+  overflow-wrap:anywhere;
 }
 
 .unlock {
-  border-top: 1px solid var(--border);
-  padding-top: 22px;
-  margin-top: 24px;
+  border-top:1px solid var(--border);
+  padding-top:22px;
+  margin-top:24px;
 }
 
 .document {
-  background: var(--bg);
-  border-left: 4px solid var(--gold);
-  padding: 16px 20px;
-  margin: 20px 0;
+  background:var(--bg);
+  border-left:4px solid var(--gold);
+  padding:16px 20px;
+  margin:20px 0;
 }
 
 /* PAPIER-ENIGMA */
 
 .pdf-preview {
-  display: block;
-  width: 100%;
-  height: 580px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #f4ead7;
-  margin: 16px 0;
+  display:block;
+  width:100%;
+  height:580px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#f4ead7;
+  margin:16px 0;
 }
 
 .download {
-  display: inline-block;
-  background: var(--gold);
-  color: #17232d;
-  padding: 13px 19px;
-  border-radius: 10px;
-  font-weight: bold;
-  text-decoration: none;
-  margin: 10px 0;
+  display:inline-block;
+  background:var(--gold);
+  color:#17232d;
+  padding:13px 19px;
+  border-radius:10px;
+  font-weight:bold;
+  text-decoration:none;
+  margin:10px 0;
 }
 
-.download:hover { background: #f3d18d; }
+.download:hover {
+  background:#f3d18d;
+}
 
 .checker {
-  color: #ffe09a;
-  font-weight: bold;
+  color:#ffe09a;
+  font-weight:bold;
 }
 
-/* NEUER HINWEIS ZUM CHECKER */
-
 .checkerhinweis {
-  background: var(--bg);
-  border-left: 4px solid var(--gold);
-  padding: 14px 18px;
-  margin: 18px 0;
-  color: var(--text);
+  background:var(--bg);
+  border-left:4px solid var(--gold);
+  padding:14px 18px;
+  margin:18px 0;
 }
 
 /* ERFOLGSBANNER */
 
 .bannerbox {
-  margin-top: 32px;
-  padding: 20px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  text-align: center;
+  margin-top:32px;
+  padding:20px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:12px;
+  text-align:center;
 }
 
-.bannerbox h3 { margin-top: 0; }
+.bannerbox h3 { margin-top:0; }
 
 .bannerlink {
-  display: inline-block;
-  color: #ffe09a;
-  font-weight: bold;
-  text-decoration: underline;
-  margin: 10px 0;
+  display:inline-block;
+  color:#ffe09a;
+  font-weight:bold;
+  text-decoration:underline;
+  margin:10px 0;
 }
 
 /* BEDIENELEMENTE */
 
 .actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 18px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:18px;
 }
 
 .action {
-  color: var(--text);
-  background: #465a68;
-  border: 1px solid #82939c;
-  border-radius: 12px;
-  padding: 11px 18px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
+  color:var(--text);
+  background:#465a68;
+  border:1px solid #82939c;
+  border-radius:12px;
+  padding:11px 18px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.action:hover { background: #526b7b; }
+.action:hover { background:#526b7b; }
 
 .hint {
-  display: none;
-  margin-top: 15px;
-  padding: 14px;
-  border-left: 3px solid var(--gold);
-  background: var(--bg);
+  display:none;
+  margin-top:15px;
+  padding:14px;
+  border-left:3px solid var(--gold);
+  background:var(--bg);
 }
 
 .back {
-  display: inline-block;
-  margin-top: 24px;
-  padding: 12px 18px;
-  color: #17232d;
-  background: var(--gold);
-  border-radius: 10px;
-  font-weight: bold;
-  text-decoration: none;
+  display:inline-block;
+  margin-top:24px;
+  padding:12px 18px;
+  color:#17232d;
+  background:var(--gold);
+  border-radius:10px;
+  font-weight:bold;
+  text-decoration:none;
 }
 
 /* DANKSAGUNG */
 
 .danksagung {
-  margin-top: 28px;
-  padding: 16px 20px;
-  background: var(--panel);
-  border-left: 4px solid var(--gold);
+  margin-top:28px;
+  padding:16px 20px;
+  background:var(--panel);
+  border-left:4px solid var(--gold);
 }
 
-.danksagung h3 { margin-top: 0; }
-
-.danksagung p { margin-bottom: 0; }
+.danksagung h3 { margin-top:0; }
+.danksagung p { margin-bottom:0; }
 
 .footer {
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 2px;
-  margin-top: 28px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:2px;
+  margin-top:28px;
 }
 
-[hidden] { display: none !important; }
+[hidden] { display:none !important; }
 
-@media (max-width: 650px) {
-  .panels { grid-template-columns: 1fr; }
-  .panel { padding: 16px; }
-  .lights { max-width: 340px; }
-  .pdf-preview { height: 430px; }
+@media(max-width:650px) {
+  .panels {
+    grid-template-columns:1fr;
+  }
+  .panel { padding:16px; }
+  .lights { max-width:340px; }
+  .pdf-preview { height:430px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
 }
 </style>
 </head>
@@ -375,7 +376,9 @@ h3 { color: var(--gold); }
 <body>
 <main>
 
-<!-- AKTE 001 -->
+<!-- ================================= -->
+<!-- AKTE 001                          -->
+<!-- ================================= -->
 
 <div class="eyebrow">
   FUNKARCHIV // AKTE 001
@@ -383,7 +386,7 @@ h3 { color: var(--gold); }
 
 <h1>Der letzte Funkspruch</h1>
 
-<!-- IDENTISCHES FUNKRAUM-BILD WIE IM LISTING -->
+<!-- FUNKRAUM-BILD MIT UNSICHTBARER BOTSCHAFT -->
 
 <div class="funkraum">
 
@@ -391,8 +394,6 @@ h3 { color: var(--gold); }
     src="Stimmungsvoller%20Funkraum%20mit%20Enigma-Schaltpulten.png"
     alt="Der verlassene Funkraum mit zwei Schalttafeln"
     draggable="false">
-
-  <!-- UNSICHTBARE ATBASH-BOTSCHAFT -->
 
   <div class="geheimnis">WRV VMRTNZ TRYG VH ZFXS RM VOVPGILMRHXSVM EZIRZMGVM. ZOOVIWRMTH NFHHG WF DRHHVM, DRV WF WRVHV IRXSGRT VRMHGVOOHG.</div>
 
@@ -425,7 +426,7 @@ h3 { color: var(--gold); }
 
 </div>
 
-<!-- SCHALTTAFELN: JEWEILS 9 LAMPEN -->
+<!-- JEWEILS GENAU NEUN LAMPEN -->
 
 <section class="panels">
 
@@ -477,7 +478,7 @@ h3 { color: var(--gold); }
     Die Schalttafeln warten auf deine Eingaben.
   </p>
 
-  <!-- AKTE 002: ERST NACH BEIDEN GELÖSTEN TAFELN -->
+  <!-- AKTE 002 ERST NACH BEIDEN GELÖSTEN TAFELN -->
 
   <div id="akte2" class="unlock" hidden>
 
@@ -495,32 +496,26 @@ h3 { color: var(--gold); }
 
     </div>
 
-    <!-- DIE MYSTERIÖSE SKIZZE -->
+    <!-- MYSTERIÖSE SKIZZE -->
 
     <h3>Die mysteriöse Skizze</h3>
 
     <p>
       Mit dem Erlöschen der letzten Lampe
-      wird nicht nur die verschlüsselte
-      Funknachricht sichtbar. Auch ein weiteres
-      Geheimnis des verlassenen Funkraums
-      offenbart sich.
+      wird nicht nur die verschlüsselte Funknachricht
+      sichtbar. Auch ein weiteres Geheimnis des
+      verlassenen Funkraums offenbart sich.
     </p>
 
     <p>
       Plötzlich ergibt auch das
-      <strong>
-        vergilbte Papier auf dem alten Arbeitstisch
-      </strong>
-      einen Sinn ...
+      <strong>vergilbte Papier auf dem alten
+      Arbeitstisch</strong> einen Sinn ...
     </p>
 
     <p>
       Es zeigt eine höchst ungewöhnliche Vorrichtung
       mit drei verschiebbaren Walzen und einem Reflektor.
-    </p>
-
-    <p>
       Offenbar handelt es sich um eine
       <strong>Enigma aus Papier!</strong>
     </p>
@@ -575,17 +570,15 @@ h3 { color: var(--gold); }
       </a>
     </p>
 
-    <!-- LETZTER AUFTRAG -->
+    <!-- CHECKER UND RÜCKKEHRPUNKT -->
 
-    <h3>Dein letzter Auftrag</h3>
+    <h3 id="checker">Dein letzter Auftrag</h3>
 
     <p>
       Entschlüssle die Nachricht mit der Enigma
       und gib den erhaltenen Satz im Checker ein.
       Dort erfährst du die Finalkoordinaten.
     </p>
-
-    <!-- CERTITUDE-CHECKER -->
 
     <p>
       <a
@@ -597,23 +590,20 @@ h3 { color: var(--gold); }
       </a>
     </p>
 
-    <!-- NEU: HINWEIS ZUR RÜCKKEHR VOM CHECKER -->
-
     <div class="checkerhinweis">
 
       <strong>Hinweis:</strong>
-      Der Checker öffnet sich in einem neuen
-      Browser-Tab.
+      Der Checker öffnet sich in einem neuen Browser-Tab.
 
       <p>
         Nach erfolgreicher Prüfung kehrst du
-        einfach zum Funkarchiv-Tab zurück.
+        einfach zum Funkarchiv zurück.
         Dort wartet auch dein Erfolgsbanner!
       </p>
 
     </div>
 
-    <!-- ERFOLGSBANNER NUR IN AKTE 002 -->
+    <!-- ERFOLGSBANNER -->
 
     <div class="bannerbox">
 
@@ -634,9 +624,7 @@ h3 { color: var(--gold); }
       <p>
         <a
           class="bannerlink"
-          href="https://robyk52.github.io/lampenraetsel/banner.html"
-          target="_blank"
-          rel="noopener noreferrer">
+          href="banner.html">
           &#9733; Erfolgsbanner herunterladen
           und HTML-Code kopieren
         </a>
@@ -667,8 +655,6 @@ h3 { color: var(--gold); }
 
   </div>
 
-  <!-- HINWEIS ZUM LAMPENRÄTSEL -->
-
   <div class="hint" id="hint">
 
     Beim Drücken einer Lampe werden nur diese
@@ -679,8 +665,6 @@ h3 { color: var(--gold); }
 
   </div>
 
-  <!-- RÜCKLINK ZUM GEOCACHING-LISTING -->
-
   <a
     class="back"
     href="https://coord.info/GCBZJCH">
@@ -689,7 +673,7 @@ h3 { color: var(--gold); }
 
 </section>
 
-<!-- DANKSAGUNG: IMMER SICHTBAR -->
+<!-- DANKSAGUNG IMMER SICHTBAR -->
 
 <div class="danksagung">
 
@@ -698,8 +682,8 @@ h3 { color: var(--gold); }
   <p>
     Ein herzliches Dankeschön an
     <strong>das-Sugus</strong>
-    für den erfolgreichen Betatest und die
-    wertvolle Unterstützung bei der
+    für den erfolgreichen Betatest und
+    die wertvolle Unterstützung bei der
     Fertigstellung dieses Rätsels!
   </p>
 
@@ -713,7 +697,12 @@ h3 { color: var(--gold); }
 
 <script>
 
-/* ANFANGSZUSTAND DER SCHALTTAFELN */
+/* ======================================= */
+/* DAUERHAFTE SPEICHERUNG IM BROWSER        */
+/* ======================================= */
+
+const STORAGE_KEY =
+  "funkspruch-gcbzjch-spielstand-v2";
 
 const initial = [
   [0,1,1,1,1,1,0,1,0],
@@ -723,10 +712,70 @@ const initial = [
 let boards = initial.map(board => [...board]);
 let previouslyUnlocked = false;
 
-/* PRÜFEN, OB EINE SCHALTTAFEL GELÖST IST */
+/* GESPEICHERTEN SPIELSTAND LADEN */
+
+function loadGame() {
+
+  try {
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    const valid =
+      Array.isArray(data) &&
+      data.length === 2 &&
+      data.every(board =>
+        Array.isArray(board) &&
+        board.length === 9 &&
+        board.every(value =>
+          value === 0 || value === 1
+        )
+      );
+
+    if (valid) {
+
+      boards = data.map(board => [...board]);
+
+    }
+
+  } catch (error) {
+
+    boards = initial.map(board => [...board]);
+
+  }
+
+}
+
+/* SPIELSTAND SPEICHERN */
+
+function saveGame() {
+
+  try {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(boards)
+    );
+
+  } catch (error) {
+
+    /* Auch ohne Speicherung spielbar */
+
+  }
+
+}
+
+/* PRÜFEN, OB EINE TAFEL GELÖST IST */
 
 function isSolved(index) {
-  return boards[index].every(value => value === 0);
+
+  return boards[index].every(
+    value => value === 0
+  );
+
 }
 
 /* LAMPE UND DIREKTE NACHBARN UMSCHALTEN */
@@ -737,38 +786,50 @@ function toggleLamp(boardIndex, lampIndex) {
   const col = lampIndex % 3;
 
   const neighbors = [
-    [row, col],
-    [row - 1, col],
-    [row + 1, col],
-    [row, col - 1],
-    [row, col + 1]
+    [row,col],
+    [row-1,col],
+    [row+1,col],
+    [row,col-1],
+    [row,col+1]
   ];
 
-  neighbors.forEach(([r, c]) => {
+  neighbors.forEach(([r,c]) => {
 
-    if (r >= 0 && r < 3 && c >= 0 && c < 3) {
-      boards[boardIndex][r * 3 + c] ^= 1;
+    if (
+      r >= 0 &&
+      r < 3 &&
+      c >= 0 &&
+      c < 3
+    ) {
+
+      boards[boardIndex][r*3+c] ^= 1;
+
     }
 
   });
 
+  saveGame();
   render();
+
 }
 
 /* ANZEIGE AKTUALISIEREN */
 
 function render() {
 
-  boards.forEach((board, boardIndex) => {
+  boards.forEach((board,boardIndex) => {
 
     const container =
-      document.getElementById("lights" + boardIndex);
+      document.getElementById(
+        "lights" + boardIndex
+      );
 
     container.replaceChildren();
 
-    board.forEach((value, lampIndex) => {
+    board.forEach((value,lampIndex) => {
 
-      const button = document.createElement("button");
+      const button =
+        document.createElement("button");
 
       button.className =
         "lamp" + (value ? " on" : "");
@@ -777,57 +838,77 @@ function render() {
 
       button.setAttribute(
         "aria-label",
-        "Schalttafel " + (boardIndex + 1) +
-        ", Lampe " + (lampIndex + 1) +
-        (value ? ", eingeschaltet" : ", ausgeschaltet")
+        "Schalttafel " + (boardIndex+1) +
+        ", Lampe " + (lampIndex+1) +
+        (value
+          ? ", eingeschaltet"
+          : ", ausgeschaltet")
       );
 
-      const bulb = document.createElement("span");
+      const bulb =
+        document.createElement("span");
+
       bulb.className = "bulb";
 
       button.appendChild(bulb);
 
       button.addEventListener("click", () => {
-        toggleLamp(boardIndex, lampIndex);
+
+        toggleLamp(boardIndex,lampIndex);
+
       });
 
       container.appendChild(button);
 
     });
 
-    const count = board.filter(Boolean).length;
-    const solved = isSolved(boardIndex);
+    const count =
+      board.filter(Boolean).length;
 
-    document.getElementById("count" + boardIndex)
-      .textContent = count + " / 9 an";
+    const solved =
+      isSolved(boardIndex);
 
-    document.getElementById("panel" + boardIndex)
-      .classList.toggle("done", solved);
+    document.getElementById(
+      "count" + boardIndex
+    ).textContent = count + " / 9 an";
 
-    document.getElementById("status" + boardIndex)
-      .textContent = solved
-        ? "Schalttafel entschlüsselt ✓"
-        : "Schalte alle Lampen aus.";
+    document.getElementById(
+      "panel" + boardIndex
+    ).classList.toggle(
+      "done",
+      solved
+    );
+
+    document.getElementById(
+      "status" + boardIndex
+    ).textContent = solved
+      ? "Schalttafel entschlüsselt ✓"
+      : "Schalte alle Lampen aus.";
 
   });
 
-  /* BEIDE SCHALTTAFELN MÜSSEN GELÖST SEIN */
+  /* BEIDE TAFELN MÜSSEN GELÖST SEIN */
 
-  const bothSolved = isSolved(0) && isSolved(1);
+  const bothSolved =
+    isSolved(0) && isSolved(1);
 
-  document.getElementById("messageTitle")
-    .textContent = bothSolved
-      ? "Die Funkverbindung ist hergestellt"
-      : "Die Nachricht ist noch verborgen";
+  document.getElementById(
+    "messageTitle"
+  ).textContent = bothSolved
+    ? "Die Funkverbindung ist hergestellt"
+    : "Die Nachricht ist noch verborgen";
 
-  document.getElementById("messageText")
-    .textContent = bothSolved
-      ? "Alle Lampen sind erloschen. Ein weiteres Dokument wurde freigegeben."
-      : "Erst wenn beide Schalttafeln dunkel sind, wird die letzte Nachricht sichtbar.";
+  document.getElementById(
+    "messageText"
+  ).textContent = bothSolved
+    ? "Alle Lampen sind erloschen. Ein weiteres Dokument wurde freigegeben."
+    : "Erst wenn beide Schalttafeln dunkel sind, wird die letzte Nachricht sichtbar.";
 
-  /* AKTE 002 FREISCHALTEN ODER VERBERGEN */
+  /* AKTE 002 SICHTBAR ODER VERBORGEN */
 
-  document.getElementById("akte2").hidden = !bothSolved;
+  document.getElementById(
+    "akte2"
+  ).hidden = !bothSolved;
 
   /* PDF ERST NACH DEM LÖSEN LADEN */
 
@@ -847,56 +928,133 @@ function render() {
 
   }
 
-  /* BEIM ERSTMALIGEN LÖSEN ZU AKTE 002 */
+  /* NACH ERSTMALIGER FREISCHALTUNG */
 
-  if (bothSolved && !previouslyUnlocked) {
+  if (
+    bothSolved &&
+    !previouslyUnlocked &&
+    window.location.hash !== "#checker"
+  ) {
 
     document.getElementById("akte2")
       .scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
+        behavior:"smooth",
+        block:"nearest"
       });
 
   }
 
   previouslyUnlocked = bothSolved;
+
 }
 
-/* NEU BEGINNEN */
+/* NEU BEGINNEN: SPIELSTAND LÖSCHEN */
 
 function resetGame() {
 
-  boards = initial.map(board => [...board]);
+  boards = initial.map(
+    board => [...board]
+  );
+
+  try {
+
+    localStorage.removeItem(STORAGE_KEY);
+
+  } catch (error) {
+
+    /* Keine Aktion erforderlich */
+
+  }
+
   previouslyUnlocked = false;
 
-  document.getElementById("hint").style.display =
-    "none";
+  if (window.location.hash === "#checker") {
 
-  document.getElementById("hintButton")
-    .textContent = "Hinweis anzeigen";
+    history.replaceState(
+      null,
+      "",
+      window.location.pathname +
+      window.location.search
+    );
+
+  }
+
+  document.getElementById(
+    "hint"
+  ).style.display = "none";
+
+  document.getElementById(
+    "hintButton"
+  ).textContent = "Hinweis anzeigen";
 
   render();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
 /* HINWEIS EIN- UND AUSBLENDEN */
 
 function toggleHint() {
 
-  const hint = document.getElementById("hint");
-  const button = document.getElementById("hintButton");
+  const hint =
+    document.getElementById("hint");
 
-  const visible = hint.style.display === "block";
+  const button =
+    document.getElementById("hintButton");
 
-  hint.style.display = visible ? "none" : "block";
+  const visible =
+    hint.style.display === "block";
+
+  hint.style.display =
+    visible ? "none" : "block";
 
   button.textContent = visible
     ? "Hinweis anzeigen"
     : "Hinweis verbergen";
+
 }
 
-/* START */
+/* ======================================= */
+/* START                                    */
+/* ======================================= */
 
+loadGame();
 render();
+
+/* RÜCKKEHR VOM ERFOLGSBANNER */
+
+if (window.location.hash === "#checker") {
+
+  if (isSolved(0) && isSolved(1)) {
+
+    requestAnimationFrame(() => {
+
+      document.getElementById("checker")
+        .scrollIntoView({
+          behavior:"auto",
+          block:"start"
+        });
+
+    });
+
+  } else {
+
+    /* AKTE 002 BLEIBT OHNE LÖSUNG GESPERRT */
+
+    history.replaceState(
+      null,
+      "",
+      window.location.pathname +
+      window.location.search
+    );
+
+  }
+
+}
 
 </script>
 </body>
