@@ -4,8 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Der letzte Funkspruch – Rätseltest</title>
+<title>Der letzte Funkspruch</title>
 
 <style>
 :root {
@@ -17,13 +16,9 @@
   --border: #647581;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -51,13 +46,8 @@ h1 {
   margin: 8px 0 18px;
 }
 
-h2 {
-  margin: 0 0 14px;
-}
-
-h3 {
-  color: var(--gold);
-}
+h2 { margin: 0 0 14px; }
+h3 { color: var(--gold); }
 
 /* FUNKRAUM-BILD */
 
@@ -78,7 +68,7 @@ h3 {
   -webkit-user-select: none;
 }
 
-/* VERSTECKTE ATBASH-BOTSCHAFT */
+/* UNSICHTBARE ATBASH-BOTSCHAFT */
 
 .geheimnis {
   position: absolute;
@@ -111,7 +101,7 @@ h3 {
   color: #17232d;
 }
 
-/* SPIELANLEITUNG */
+/* ANLEITUNG */
 
 .rules {
   background: var(--panel);
@@ -136,9 +126,7 @@ h3 {
   text-align: center;
 }
 
-.panel.done {
-  border-color: #8fc8ac;
-}
+.panel.done { border-color: #8fc8ac; }
 
 .panelhead {
   display: flex;
@@ -212,7 +200,7 @@ h3 {
   color: var(--muted);
 }
 
-/* FUNKSPRUCH UND ZWEITE AKTE */
+/* GEHEIMER FUNKSPRUCH */
 
 .bottom {
   background: var(--panel);
@@ -222,9 +210,7 @@ h3 {
   padding: 24px;
 }
 
-.bottom h2 {
-  color: var(--gold);
-}
+.bottom h2 { color: var(--gold); }
 
 .secret {
   color: #ffe09a;
@@ -270,16 +256,14 @@ h3 {
   margin: 10px 0;
 }
 
-.download:hover {
-  background: #f3d18d;
-}
+.download:hover { background: #f3d18d; }
 
 .checker {
   color: #ffe09a;
   font-weight: bold;
 }
 
-/* SCHALTFLÄCHEN */
+/* BEDIENELEMENTE */
 
 .actions {
   display: flex;
@@ -299,9 +283,7 @@ h3 {
   cursor: pointer;
 }
 
-.action:hover {
-  background: #526b7b;
-}
+.action:hover { background: #526b7b; }
 
 .hint {
   display: none;
@@ -330,32 +312,17 @@ h3 {
   margin-top: 28px;
 }
 
-[hidden] {
-  display: none !important;
-}
+[hidden] { display: none !important; }
 
 @media (max-width: 650px) {
-  .panels {
-    grid-template-columns: 1fr;
-  }
-
-  .panel {
-    padding: 16px;
-  }
-
-  .lights {
-    max-width: 340px;
-  }
-
-  .pdf-preview {
-    height: 430px;
-  }
+  .panels { grid-template-columns: 1fr; }
+  .panel { padding: 16px; }
+  .lights { max-width: 340px; }
+  .pdf-preview { height: 430px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
 }
 </style>
 </head>
@@ -363,29 +330,31 @@ h3 {
 <body>
 <main>
 
+<!-- AKTE 001 -->
+
 <div class="eyebrow">
   FUNKARCHIV // AKTE 001
 </div>
 
 <h1>Der letzte Funkspruch</h1>
 
-<!-- FUNKRAUM: IDENTISCH MIT DEM LISTING -->
+<!-- FUNKRAUM-BILD: IDENTISCH MIT DEM LISTING -->
 
 <div class="funkraum">
 
   <img
     src="Stimmungsvoller%20Funkraum%20mit%20Enigma-Schaltpulten.png"
-    alt="Funkraum mit zwei Schalttafeln und vergilbtem Enigma-Papier"
+    alt="Der verlassene Funkraum mit zwei Schalttafeln"
     draggable="false">
 
-  <!-- Nur auf dieser Rätselseite sichtbar,
-       wenn der Text markiert wird. -->
+  <!-- UNSICHTBARE ATBASH-BOTSCHAFT -->
+  <!-- NUR DURCH MARKIEREN ENTDECKBAR -->
 
   <div class="geheimnis">WRV VMRTNZ TRYG VH ZFXS RM VOVPGILMRHXSVM EZIRZMGVM. ZOOVIWRMTH NFHHG WF DRHHVM, DRV WF WRVHV IRXSGRT VRMHGVOOHG.</div>
 
 </div>
 
-<!-- ANLEITUNG -->
+<!-- ANLEITUNG ZU DEN SCHALTTAFELN -->
 
 <div class="rules">
 
@@ -412,9 +381,11 @@ h3 {
 
 </div>
 
-<!-- SCHALTTAFEL 1 UND 2 -->
+<!-- BEIDE SCHALTTAFELN -->
 
 <section class="panels">
+
+  <!-- SCHALTTAFEL 1 -->
 
   <div class="panel" id="panel0">
 
@@ -430,6 +401,8 @@ h3 {
     </div>
 
   </div>
+
+  <!-- SCHALTTAFEL 2 -->
 
   <div class="panel" id="panel1">
 
@@ -464,8 +437,11 @@ h3 {
     Die Schalttafeln warten auf deine Eingaben.
   </p>
 
-  <!-- DIE ZWEITE AKTE ERSCHEINT ERST NACH
-       DEM LÖSEN BEIDER SCHALTTAFELN. -->
+  <!--
+    AKTE 002:
+    ERST SICHTBAR, WENN BEIDE SCHALTTAFELN
+    VOLLSTÄNDIG GELÖST SIND.
+  -->
 
   <div id="akte2" class="unlock" hidden>
 
@@ -481,29 +457,67 @@ h3 {
       </div>
     </div>
 
-    <h3>Ein vergilbtes Dokument</h3>
+    <!-- NEUE GESCHICHTE ZUM VERGILBTEN PAPIER -->
+
+    <h3>Die mysteriöse Skizze</h3>
 
     <p>
-      Neben den Schalttafeln lag eine alte Zeichnung.
-      Sie zeigt drei verschiebbare Walzen und einen
-      Reflektor. Offenbar handelt es sich um eine
-      Chiffriermaschine aus Papier.
+      Mit dem Erlöschen der letzten Lampe
+      wird nicht nur die verschlüsselte
+      Funknachricht sichtbar. Auch ein weiteres
+      Geheimnis des verlassenen Funkraums
+      offenbart sich.
     </p>
 
     <p>
-      Drucke die Vorlage aus, schneide die Teile
-      sorgfältig aus und setze die Maschine zusammen.
-      Die Anleitung führt dich durch die Entschlüsselung.
+      Plötzlich ergibt auch das
+      <strong>vergilbte Papier auf dem alten
+      Arbeitstisch</strong> einen Sinn ...
     </p>
 
-    <h3>Die Papier-Enigma</h3>
+    <p>
+      Es zeigt eine höchst ungewöhnliche
+      Vorrichtung mit drei verschiebbaren
+      Walzen und einem Reflektor.
+    </p>
+
+    <p>
+      Offenbar handelt es sich um eine
+      <strong>Enigma aus Papier!</strong>
+    </p>
+
+    <p>
+      Die Skizze enthält sogar eine Bau-
+      und Bedienungsanleitung.
+    </p>
+
+    <!-- PAPIER-ENIGMA -->
+
+    <div class="document">
+
+      <h3>Die Papier-Enigma</h3>
+
+      <p>
+        Diese Zeichnung könnte der Schlüssel
+        zur Entschlüsselung des letzten
+        Funkspruchs sein.
+      </p>
+
+      <p>
+        Drucke die Vorlage aus, schneide
+        die Teile sorgfältig aus und
+        setze die Maschine gemäss
+        Anleitung zusammen.
+      </p>
+
+    </div>
 
     <p>
       Hier kannst du die Vorlage direkt ansehen,
       ausdrucken oder herunterladen.
     </p>
 
-    <!-- PDF-VORSCHAU BLEIBT AUF DER RÄTSELSEITE -->
+    <!-- PDF-VORSCHAU DIREKT AUF DER SEITE -->
 
     <iframe
       id="pdfPreview"
@@ -512,7 +526,7 @@ h3 {
       data-src="Enigma_Funkspruch_final.pdf">
     </iframe>
 
-    <!-- DIREKTER DOWNLOAD OHNE GITHUB-OBERFLÄCHE -->
+    <!-- DIREKTER PDF-DOWNLOAD -->
 
     <p>
       <a
@@ -522,6 +536,8 @@ h3 {
         &#8595; Papier-Enigma herunterladen (PDF)
       </a>
     </p>
+
+    <!-- LETZTER AUFTRAG -->
 
     <h3>Dein letzter Auftrag</h3>
 
@@ -564,12 +580,16 @@ h3 {
 
   </div>
 
+  <!-- HINWEIS ZUM LAMPENRÄTSEL -->
+
   <div class="hint" id="hint">
     Beim Drücken einer Lampe werden nur diese
     und ihre unmittelbaren Nachbarn umgeschaltet.
     Überlege, welche Lampen du nur durch einen
     bestimmten Schalter erreichen kannst.
   </div>
+
+  <!-- ZURÜCK ZUM GEOCACHING-LISTING -->
 
   <a
     class="back"
@@ -595,16 +615,15 @@ const initial = [
 ];
 
 let boards = initial.map(board => [...board]);
-
 let previouslyUnlocked = false;
 
-/* PRÜFEN, OB ALLE LAMPEN AUS SIND */
+/* PRÜFEN, OB EINE SCHALTTAFEL GELÖST IST */
 
 function isSolved(index) {
   return boards[index].every(value => value === 0);
 }
 
-/* LAMPEN UMSCHALTEN */
+/* LAMPE UND DIREKTE NACHBARN UMSCHALTEN */
 
 function toggleLamp(boardIndex, lampIndex) {
 
@@ -698,24 +717,29 @@ function render() {
       ? "Alle Lampen sind erloschen. Ein weiteres Dokument wurde freigegeben."
       : "Erst wenn beide Schalttafeln dunkel sind, wird die letzte Nachricht sichtbar.";
 
+  /* ZWEITE AKTE FREISCHALTEN */
+
   document.getElementById("akte2").hidden = !bothSolved;
 
-  /* PDF ERST BEI FREIGABE LADEN */
+  /* PDF ERST NACH DEM LÖSEN LADEN */
 
   if (bothSolved) {
 
-    const preview = document.getElementById("pdfPreview");
+    const preview =
+      document.getElementById("pdfPreview");
 
     if (!preview.getAttribute("src")) {
+
       preview.setAttribute(
         "src",
         preview.getAttribute("data-src")
       );
+
     }
 
   }
 
-  /* ZUR FREIGEGEBENEN AKTE SCROLLEN */
+  /* AUTOMATISCH ZUR FREIGEGEBENEN AKTE */
 
   if (bothSolved && !previouslyUnlocked) {
 
@@ -730,12 +754,11 @@ function render() {
   previouslyUnlocked = bothSolved;
 }
 
-/* SPIEL NEU BEGINNEN */
+/* NEU BEGINNEN */
 
 function resetGame() {
 
   boards = initial.map(board => [...board]);
-
   previouslyUnlocked = false;
 
   document.getElementById("hint").style.display =
@@ -752,7 +775,6 @@ function resetGame() {
 function toggleHint() {
 
   const hint = document.getElementById("hint");
-
   const button = document.getElementById("hintButton");
 
   const visible = hint.style.display === "block";
