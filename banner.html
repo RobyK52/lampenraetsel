@@ -1,15 +1,237 @@
 
-<div style="background:#354653;border:1px solid #647581;padding:18px;margin:24px 0;text-align:center;">
-  <h3 style="color:#e2b76c;">Banner für erfolgreiche Finder</h3>
-  <p style="color:#edf0ed;">
-    Du hast den letzten Funkspruch entschlüsselt und
-    den Cache gefunden? Dann hol dir deinen Erfolgsbanner!
-  </p>
-  <a href="https://robyk52.github.io/lampenraetsel/banner.html"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="color:#ffe09a;font-weight:bold;">
-    ★ Erfolgsbanner und HTML-Code fürs Profil
-  </a>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Der letzte Funkspruch – Erfolgsbanner</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 25px 15px;
+  background: #293845;
+  color: #edf0ed;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+main {
+  max-width: 850px;
+  margin: auto;
+  text-align: center;
+}
+
+.akte {
+  color: #e2b76c;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+h1 {
+  color: white;
+  font-size: 32px;
+}
+
+h2 {
+  color: #e2b76c;
+}
+
+.banner {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 25px auto;
+  border: 1px solid #647581;
+  border-radius: 8px;
+}
+
+.kasten {
+  background: #354653;
+  border: 1px solid #647581;
+  padding: 20px;
+  margin: 25px 0;
+  border-radius: 12px;
+}
+
+textarea {
+  width: 100%;
+  height: 125px;
+  padding: 14px;
+  background: #f4f1e9;
+  color: #17232d;
+  border: 1px solid #647581;
+  border-radius: 8px;
+  font: 13px/1.5 monospace;
+  resize: vertical;
+}
+
+button {
+  background: #e2b76c;
+  color: #17232d;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 22px;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f4d18d;
+}
+
+.download {
+  display: inline-block;
+  margin: 10px;
+  padding: 11px 18px;
+  border: 1px solid #e2b76c;
+  border-radius: 8px;
+  color: #ffe09a;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.meldung {
+  min-height: 25px;
+  color: #ffe09a;
+  font-weight: bold;
+}
+
+footer {
+  margin-top: 35px;
+  padding-top: 20px;
+  border-top: 1px solid #647581;
+  color: #9fbbc9;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<main>
+
+<div class="akte">
+  FUNKARCHIV // AKTE 003
 </div>
 
+<h1>Der letzte Funkspruch</h1>
+
+<h2>Mission erfolgreich abgeschlossen!</h2>
+
+<p>
+Du hast den letzten Funkspruch entschlüsselt
+und den Geocache gefunden?
+</p>
+
+<p>
+Herzlichen Glückwunsch!
+Du darfst diesen Erfolgsbanner gerne
+in deinem persönlichen Geocaching-Profil verwenden.
+</p>
+
+<!-- ERFOLGSBANNER -->
+
+<img
+  class="banner"
+  id="bannerbild"
+  src="Der%20letzte%20Funkspruch%20%E2%80%93%20Geheimakte%20003.png"
+  alt="Der letzte Funkspruch – Erfolgsbanner">
+
+<p>
+  <a
+    class="download"
+    href="Der%20letzte%20Funkspruch%20%E2%80%93%20Geheimakte%20003.png"
+    download="Der_letzte_Funkspruch_Erfolgsbanner.png">
+    ↓ Banner herunterladen (PNG)
+  </a>
+</p>
+
+<!-- HTML-CODE FÜR DIE CACHER -->
+
+<div class="kasten">
+
+<h2>HTML-Code für dein Geocaching-Profil</h2>
+
+<p>
+Kopiere den folgenden HTML-Code und füge
+ihn in die HTML-Ansicht deines
+Geocaching-Profils ein.
+</p>
+
+<textarea id="htmlcode" readonly></textarea>
+
+<p>
+<button type="button" onclick="copyCode()">
+  HTML-Code kopieren
+</button>
+</p>
+
+<p id="meldung" class="meldung" aria-live="polite"></p>
+
+</div>
+
+<p>
+Der Banner ist mit dem Geocache
+<strong>GCBZJCH</strong> verlinkt.
+</p>
+
+<footer>
+  FUNKARCHIV // ENDE DER ÜBERTRAGUNG
+</footer>
+
+</main>
+
+<script>
+
+const bannerURL =
+  "https://robyk52.github.io/lampenraetsel/" +
+  "Der%20letzte%20Funkspruch%20%E2%80%93%20Geheimakte%20003.png";
+
+const profilHTML =
+  '<a href="https://coord.info/GCBZJCH" target="_blank">' +
+  '<img src="' + bannerURL + '"' +
+  ' alt="Der letzte Funkspruch – Mission erfolgreich abgeschlossen"' +
+  ' width="600" style="max-width:100%;height:auto;border:0;">' +
+  '</a>';
+
+document.getElementById("htmlcode").value = profilHTML;
+
+async function copyCode() {
+
+  const field = document.getElementById("htmlcode");
+  const meldung = document.getElementById("meldung");
+
+  try {
+
+    await navigator.clipboard.writeText(field.value);
+
+    meldung.textContent =
+      "✓ HTML-Code erfolgreich kopiert!";
+
+  } catch (error) {
+
+    field.focus();
+    field.select();
+
+    meldung.textContent =
+      "Bitte den markierten Code mit ⌘ + C kopieren.";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
