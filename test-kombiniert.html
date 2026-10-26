@@ -5,54 +5,55 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Der letzte Funkspruch – Gesamttest</title>
-
 <style>
+:root {
+  --bg: #293845;
+  --panel: #354653;
+  --text: #edf0ed;
+  --muted: #c5d1d8;
+  --gold: #e2b76c;
+  --border: #647581;
+}
 * { box-sizing: border-box; }
-
 body {
   margin: 0;
-  background: #293845;
-  color: #edf0ed;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 Arial, Helvetica, sans-serif;
 }
-
 main {
   max-width: 1080px;
-  margin: 0 auto;
-  padding: 22px 18px 45px;
+  margin: auto;
+  padding: 24px 18px 48px;
 }
-
 .eyebrow {
-  color: #e2b76c;
+  color: var(--gold);
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 2px;
 }
-
 h1 {
-  color: white;
+  color: #fff;
   font-size: clamp(28px, 5vw, 40px);
-  margin: 10px 0 20px;
+  margin: 8px 0 18px;
 }
-
+h2 { margin: 0 0 14px; }
+h3 { color: var(--gold); }
 .funkraum {
   position: relative;
   width: 100%;
-  margin: 18px 0 28px;
+  margin: 18px 0 24px;
   line-height: 0;
 }
-
 .funkraum img {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 12px;
   pointer-events: none;
   user-select: none;
   -webkit-user-select: none;
-  border-radius: 12px;
 }
-
 .geheimnis {
   position: absolute;
   top: 65%;
@@ -72,70 +73,57 @@ h1 {
   cursor: text;
   overflow-wrap: anywhere;
 }
-
 .geheimnis::selection {
   background: #e2b76c;
   color: #17232d;
   -webkit-text-fill-color: #17232d;
 }
-
 .geheimnis::-moz-selection {
   background: #e2b76c;
   color: #17232d;
 }
-
 .rules {
-  background: #354653;
-  border-left: 4px solid #e2b76c;
-  padding: 15px 20px;
-  margin: 22px 0;
+  background: var(--panel);
+  border-left: 4px solid var(--gold);
+  padding: 16px 20px;
+  margin: 24px 0;
 }
-
 .panels {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0,1fr));
   gap: 20px;
 }
-
 .panel {
-  background: #354653;
-  border: 1px solid #647581;
+  background: var(--panel);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 22px;
   text-align: center;
 }
-
-.panel.done {
-  border-color: #8fc8ac;
-}
-
+.panel.done { border-color: #8fc8ac; }
 .panelhead {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   margin-bottom: 20px;
 }
-
 .panelhead h2 {
   margin: 0;
   font-size: clamp(17px, 2.5vw, 25px);
   text-align: left;
 }
-
 .count {
-  color: #c5d1d8;
+  color: var(--muted);
   white-space: nowrap;
 }
-
 .lights {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0,1fr));
   gap: 12px;
   max-width: 365px;
   margin: auto;
 }
-
 .lamp {
   aspect-ratio: 1;
   border: 2px solid #81909c;
@@ -143,15 +131,13 @@ h1 {
   background: #27333d;
   display: grid;
   place-items: center;
-  cursor: pointer;
   padding: 0;
+  cursor: pointer;
 }
-
 .lamp:focus-visible {
   outline: 3px solid white;
   outline-offset: 3px;
 }
-
 .bulb {
   width: 44%;
   aspect-ratio: 1;
@@ -159,12 +145,10 @@ h1 {
   background: #667782;
   box-shadow: inset 0 2px 6px #17212b;
 }
-
 .lamp.on {
   background: #59482d;
-  border-color: #e2b76c;
+  border-color: var(--gold);
 }
-
 .lamp.on .bulb {
   background: radial-gradient(
     circle at 36% 28%,
@@ -174,43 +158,45 @@ h1 {
   );
   box-shadow: 0 0 18px #ffc25799;
 }
-
 .panelstatus {
   min-height: 65px;
   padding-top: 20px;
-  color: #c5d1d8;
+  color: var(--muted);
 }
-
 .bottom {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
   margin-top: 24px;
   padding: 24px;
-  background: #354653;
-  border: 1px solid #647581;
-  border-radius: 20px;
 }
-
-.bottom h2 {
-  margin-top: 5px;
-  color: #e2b76c;
-}
-
+.bottom h2 { color: var(--gold); }
 .secret {
-  font-weight: bold;
   color: #ffe09a;
+  font-weight: bold;
   font-size: clamp(20px, 3vw, 30px);
   letter-spacing: 1px;
   overflow-wrap: anywhere;
 }
-
-.controls {
+.unlock {
+  border-top: 1px solid var(--border);
+  padding-top: 22px;
+  margin-top: 24px;
+}
+.document {
+  background: #293845;
+  border-left: 4px solid var(--gold);
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.actions {
   display: flex;
-  flex-wrap: wrap;
   gap: 12px;
+  flex-wrap: wrap;
   margin-top: 18px;
 }
-
 .action {
-  color: #edf0ed;
+  color: var(--text);
   background: #465a68;
   border: 1px solid #82939c;
   border-radius: 12px;
@@ -219,46 +205,51 @@ h1 {
   font-weight: bold;
   cursor: pointer;
 }
-
+.action:hover { background: #526b7b; }
 .hint {
   display: none;
   margin-top: 15px;
   padding: 14px;
-  border-left: 3px solid #e2b76c;
-  background: #293845;
+  border-left: 3px solid var(--gold);
+  background: var(--bg);
 }
-
+.download {
+  display: inline-block;
+  background: var(--gold);
+  color: #17232d;
+  padding: 13px 19px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 10px 0;
+}
+.download:hover { background: #f3d18d; }
+.checker {
+  color: #ffe09a;
+  font-weight: bold;
+}
 .back {
   display: inline-block;
   margin-top: 24px;
   padding: 12px 18px;
-  color: #1f2b35;
-  background: #e2b76c;
+  color: #17232d;
+  background: var(--gold);
   border-radius: 10px;
   font-weight: bold;
   text-decoration: none;
 }
-
 .footer {
   text-align: center;
-  color: #c5d1d8;
+  color: var(--muted);
   font-size: 12px;
   letter-spacing: 2px;
   margin-top: 28px;
 }
-
-@media (max-width: 650px) {
-  .panels {
-    grid-template-columns: 1fr;
-  }
-
-  .panel {
-    padding: 16px;
-  }
-
-  .lights {
-    max-width: 340px;
-  }
+[hidden] { display: none !important; }
+@media (max-width:650px) {
+  .panels { grid-template-columns: 1fr; }
+  .panel { padding: 16px; }
+  .lights { max-width: 340px; }
 }
 </style>
 </head>
@@ -272,26 +263,31 @@ h1 {
 <div class="funkraum">
   <img
     src="https://raw.githubusercontent.com/RobyK52/lampenraetsel/main/Funkraum_Titelbild.png"
-    alt="Alter Funkraum">
+    alt="Alter Funkraum"
+    draggable="false">
 
   <div class="geheimnis">WRV VMRTNZ TRYG VH ZFXS RM VOVPGILMRHXSVM EZIRZMGVM. ZOOVIWRMTH NFHHG WF DRHHVM, DRV WF WRVHV IRXSGRT VRMHGVOOHG.</div>
 </div>
 
 <div class="rules">
-  Dein Ziel ist es,
-  <strong>beide Tafeln vollständig dunkel</strong>
-  zu schalten.
+  <strong>Die beiden Schalttafeln</strong>
 
-  Beim Anklicken einer Lampe ändern sich ihr eigener
-  Zustand und der ihrer direkten Nachbarn oben, unten,
-  links und rechts.
+  <p>
+    Beim Anklicken einer Lampe ändern sich ihr Zustand
+    und der ihrer direkten Nachbarn oben, unten,
+    links und rechts. Die diagonalen Nachbarn bleiben
+    unverändert.
+  </p>
 
-  Diagonale Lampen bleiben unverändert.
+  <p>
+    Schaffst du es, beide Schalttafeln vollständig
+    dunkel zu schalten?
+  </p>
 
   <p>
     <strong>
-      Sobald beide Schalttafeln vollständig dunkel sind,
-      erscheint die verschlüsselte Funknachricht.
+      Erst wenn alle Lichter erloschen sind,
+      wird die letzte Nachricht sichtbar.
     </strong>
   </p>
 </div>
@@ -300,12 +296,10 @@ h1 {
 
   <div class="panel" id="panel0">
     <div class="panelhead">
-      <h2>✦ Schalttafel 1</h2>
-      <span class="count" id="count0">6 / 9 an</span>
+      <h2>Schalttafel 1</h2>
+      <span class="count" id="count0"></span>
     </div>
-
     <div class="lights" id="lights0"></div>
-
     <div class="panelstatus" id="status0">
       Schalte alle Lampen aus.
     </div>
@@ -313,12 +307,10 @@ h1 {
 
   <div class="panel" id="panel1">
     <div class="panelhead">
-      <h2>✦ Schalttafel 2</h2>
-      <span class="count" id="count1">6 / 9 an</span>
+      <h2>Schalttafel 2</h2>
+      <span class="count" id="count1"></span>
     </div>
-
     <div class="lights" id="lights1"></div>
-
     <div class="panelstatus" id="status1">
       Schalte alle Lampen aus.
     </div>
@@ -327,7 +319,6 @@ h1 {
 </section>
 
 <section class="bottom">
-
   <div class="eyebrow">GEHEIMER FUNKSPRUCH</div>
 
   <h2 id="messageTitle">
@@ -335,17 +326,72 @@ h1 {
   </h2>
 
   <p id="messageText">
-    Erst wenn beide Schalttafeln dunkel sind,
-    wird der vollständige Funkspruch sichtbar.
+    Die Schalttafeln warten auf deine Eingaben.
   </p>
 
-  <div class="controls">
-    <button class="action" onclick="resetGame()">
+  <div id="akte2" class="unlock" hidden>
+
+    <div class="eyebrow">AKTE 002 // FREIGEGEBEN</div>
+
+    <h2>Die letzte Nachricht</h2>
+
+    <div class="document">
+      <div class="secret">
+        HLW BHMLLA BHB MKBYS YYH IIO
+      </div>
+    </div>
+
+    <h3>Ein vergilbtes Dokument</h3>
+
+    <p>
+      Neben den Schalttafeln lag eine alte Zeichnung.
+      Sie zeigt drei verschiebbare Walzen und einen
+      Reflektor. Offenbar handelt es sich um eine
+      Chiffriermaschine aus Papier.
+    </p>
+
+    <p>
+      Drucke die Vorlage aus, schneide die Teile
+      sorgfältig aus und setze die Maschine zusammen.
+      Die Anleitung führt dich durch die Entschlüsselung.
+    </p>
+
+    <p>
+      <a class="download"
+         href="https://github.com/RobyK52/lampenraetsel/blob/main/Enigma_Funkspruch_final.pdf"
+         target="_blank"
+         rel="noopener noreferrer">
+        ↓ Papier-Enigma ansehen und herunterladen (PDF)
+      </a>
+    </p>
+
+    <h3>Dein letzter Auftrag</h3>
+
+    <p>
+      Entschlüssle die Nachricht und gib den erhaltenen
+      Satz im Checker ein. Dort erfährst du die
+      Finalkoordinaten.
+    </p>
+
+    <p>
+      <a class="checker"
+         href="https://www.certitudes.org/certitude?wp=GCBZJCH"
+         target="_blank"
+         rel="noopener noreferrer">
+        ✓ Lösung mit Certitude überprüfen
+      </a>
+    </p>
+
+  </div>
+
+  <div class="actions">
+    <button class="action" type="button"
+            onclick="resetGame()">
       ↻ Neu beginnen
     </button>
 
-    <button class="action" id="hintButton"
-            onclick="toggleHint()">
+    <button class="action" type="button"
+            id="hintButton" onclick="toggleHint()">
       Hinweis anzeigen
     </button>
   </div>
@@ -357,11 +403,9 @@ h1 {
     bestimmten Schalter erreichen kannst.
   </div>
 
-  <a class="back"
-     href="https://coord.info/GCBZJCH">
+  <a class="back" href="https://coord.info/GCBZJCH">
     ← Zurück zum Geocaching-Listing
   </a>
-
 </section>
 
 <div class="footer">ENDE DER ÜBERTRAGUNG</div>
@@ -374,13 +418,11 @@ const initial = [
   [1,1,0,1,1,0,0,1,1]
 ];
 
-const secretMessage =
-  "HLW BHMLLA BHB MKBYS YYH IIO";
+let boards = initial.map(b => [...b]);
+let previouslyUnlocked = false;
 
-let boards = initial.map(board => [...board]);
-
-function isSolved(index) {
-  return boards[index].every(value => value === 0);
+function isSolved(n) {
+  return boards[n].every(v => v === 0);
 }
 
 function toggleLamp(boardIndex, lampIndex) {
@@ -409,14 +451,12 @@ function render() {
     const container =
       document.getElementById("lights" + boardIndex);
 
-    container.innerHTML = "";
+    container.replaceChildren();
 
     board.forEach((value, lampIndex) => {
       const button = document.createElement("button");
 
-      button.className =
-        "lamp" + (value ? " on" : "");
-
+      button.className = "lamp" + (value ? " on" : "");
       button.type = "button";
 
       button.setAttribute(
@@ -428,7 +468,6 @@ function render() {
 
       const bulb = document.createElement("span");
       bulb.className = "bulb";
-
       button.appendChild(bulb);
 
       button.addEventListener("click", () => {
@@ -439,11 +478,10 @@ function render() {
     });
 
     const count = board.filter(Boolean).length;
+    const solved = isSolved(boardIndex);
 
     document.getElementById("count" + boardIndex)
       .textContent = count + " / 9 an";
-
-    const solved = isSolved(boardIndex);
 
     document.getElementById("panel" + boardIndex)
       .classList.toggle("done", solved);
@@ -458,48 +496,44 @@ function render() {
 
   document.getElementById("messageTitle")
     .textContent = bothSolved
-      ? "Die letzte Funknachricht"
+      ? "Die Funkverbindung ist hergestellt"
       : "Die Nachricht ist noch verborgen";
 
   document.getElementById("messageText")
-    .innerHTML = bothSolved
-      ? '<span class="secret">' +
-        secretMessage +
-        '</span><p>Entschlüssle diese Nachricht ' +
-        'mit deiner Papier-Enigma und gib die ' +
-        'Lösung im Checker des Listings ein.</p>'
-      : "Erst wenn beide Schalttafeln dunkel sind, " +
-        "wird der vollständige Funkspruch sichtbar.";
+    .textContent = bothSolved
+      ? "Alle Lampen sind erloschen. Ein weiteres Dokument wurde freigegeben."
+      : "Erst wenn beide Schalttafeln dunkel sind, wird die letzte Nachricht sichtbar.";
+
+  document.getElementById("akte2").hidden = !bothSolved;
+
+  if (bothSolved && !previouslyUnlocked) {
+    document.getElementById("akte2")
+      .scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+
+  previouslyUnlocked = bothSolved;
 }
 
 function resetGame() {
-  boards = initial.map(board => [...board]);
-
-  document.getElementById("hint")
-    .style.display = "none";
-
+  boards = initial.map(b => [...b]);
+  previouslyUnlocked = false;
+  document.getElementById("hint").style.display = "none";
   document.getElementById("hintButton")
     .textContent = "Hinweis anzeigen";
-
   render();
 }
 
 function toggleHint() {
   const hint = document.getElementById("hint");
   const button = document.getElementById("hintButton");
-
   const visible = hint.style.display === "block";
 
   hint.style.display = visible ? "none" : "block";
-
-  button.textContent = visible
-    ? "Hinweis anzeigen"
-    : "Hinweis verbergen";
+  button.textContent =
+    visible ? "Hinweis anzeigen" : "Hinweis verbergen";
 }
 
 render();
 </script>
-
 </body>
 </html>
-
