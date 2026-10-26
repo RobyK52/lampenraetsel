@@ -35,7 +35,7 @@ main {
 }
 
 h1 {
-  color: white;
+  color: #ffffff;
   font-size: 32px;
 }
 
@@ -106,6 +106,12 @@ button:hover {
   font-weight: bold;
 }
 
+.zurueck {
+  margin-top: 15px;
+  background: #e2b76c;
+  color: #17232d;
+}
+
 footer {
   margin-top: 35px;
   padding-top: 20px;
@@ -144,69 +150,85 @@ in deinem persönlichen Geocaching-Profil verwenden.
 
 <img
   class="banner"
-  id="bannerbild"
   src="Der%20letzte%20Funkspruch%20%E2%80%93%20Geheimakte%20003.png"
   alt="Der letzte Funkspruch – Erfolgsbanner">
+
+<!-- BANNER HERUNTERLADEN -->
 
 <p>
   <a
     class="download"
     href="Der%20letzte%20Funkspruch%20%E2%80%93%20Geheimakte%20003.png"
     download="Der_letzte_Funkspruch_Erfolgsbanner.png">
-    ↓ Banner herunterladen (PNG)
+    &#8595; Banner herunterladen (PNG)
   </a>
 </p>
 
-<!-- HTML-CODE FÜR DIE CACHER -->
+<!-- HTML-CODE FÜR DAS GEOCACHING-PROFIL -->
 
 <div class="kasten">
 
-<h2>HTML-Code für dein Geocaching-Profil</h2>
+  <h2>HTML-Code für dein Geocaching-Profil</h2>
 
-<p>
-Kopiere den folgenden HTML-Code und füge
-ihn in die HTML-Ansicht deines
-Geocaching-Profils ein.
-</p>
+  <p>
+    Kopiere den folgenden HTML-Code und füge
+    ihn in die HTML-Ansicht deines
+    Geocaching-Profils ein.
+  </p>
 
-<textarea id="htmlcode" readonly></textarea>
+  <textarea id="htmlcode" readonly></textarea>
 
-<p>
-<button type="button" onclick="copyCode()">
-  HTML-Code kopieren
-</button>
-</p>
+  <p>
+    <button type="button" onclick="copyCode()">
+      HTML-Code kopieren
+    </button>
+  </p>
 
-<p id="meldung" class="meldung" aria-live="polite"></p>
+  <p
+    id="meldung"
+    class="meldung"
+    aria-live="polite">
+  </p>
 
 </div>
 
 <p>
-Der Banner ist mit dem Geocache
-<strong>GCBZJCH</strong> verlinkt.
+  Der Banner ist mit dem Geocache
+  <strong>GCBZJCH</strong> verlinkt.
 </p>
 
+<!-- ZURÜCK ZUM FUNKARCHIV -->
 
-<p style="margin:30px 0;">
+<p style="margin:30px 0 10px;">
   <button
+    class="zurueck"
     type="button"
     onclick="zurueckZumFunkarchiv()">
     &#8592; Zurück zum Funkarchiv
   </button>
 </p>
 
+<p style="font-size:13px;color:#c5d1d8;">
+  Falls der Tab-Wechsel nicht funktioniert,
+  wechsle bitte zum bereits geöffneten
+  Funkarchiv-Tab in deinem Browser.
+</p>
+
 <footer>
   FUNKARCHIV // ENDE DER ÜBERTRAGUNG
 </footer>
-
 
 </main>
 
 <script>
 
+/* BILDADRESSE FÜR DAS GEOCACHING-PROFIL */
+
 const bannerURL =
   "https://robyk52.github.io/lampenraetsel/" +
   "Der%20letzte%20Funkspruch%20%E2%80%93%20Geheimakte%20003.png";
+
+/* HTML-CODE FÜR DEN FINDER */
 
 const profilHTML =
   '<a href="https://coord.info/GCBZJCH" target="_blank">' +
@@ -216,6 +238,8 @@ const profilHTML =
   '</a>';
 
 document.getElementById("htmlcode").value = profilHTML;
+
+/* HTML-CODE KOPIEREN */
 
 async function copyCode() {
 
@@ -236,6 +260,31 @@ async function copyCode() {
 
     meldung.textContent =
       "Bitte den markierten Code mit ⌘ + C kopieren.";
+
+  }
+
+}
+
+/* ZUM URSPRÜNGLICHEN FUNKARCHIV-TAB */
+
+function zurueckZumFunkarchiv() {
+
+  if (window.opener && !window.opener.closed) {
+
+    window.opener.focus();
+
+  } else {
+
+    /*
+      Bei gesperrtem Zugriff auf den ursprünglichen
+      Tab öffnen wir NICHT einfach das Rätsel neu,
+      denn dadurch ginge der gelöste Zustand verloren.
+    */
+
+    alert(
+      "Bitte wechsle zum bereits geöffneten " +
+      "Tab mit dem Funkarchiv zurück."
+    );
 
   }
 
