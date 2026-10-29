@@ -41,15 +41,15 @@ main {
 }
 
 h1 {
-  color:white;
-  font-size:clamp(28px,5vw,40px);
   margin:8px 0 18px;
+  color:white;
+  font-size:clamp(26px,5vw,40px);
 }
 
 h2 { margin:0 0 14px; }
 h3 { color:var(--gold); }
 
-/* FUNKRAUM-BILD */
+/* FUNKRAUM UND UNSICHTBARER TEXT */
 
 .funkraum {
   position:relative;
@@ -68,8 +68,6 @@ h3 { color:var(--gold); }
   -webkit-user-select:none;
 }
 
-/* UNSICHTBARE ATBASH-BOTSCHAFT */
-
 .geheimnis {
   position:absolute;
   top:65%;
@@ -77,9 +75,9 @@ h3 { color:var(--gold); }
   width:88%;
   z-index:2;
   text-align:center;
-  line-height:1.55;
   font-family:monospace;
   font-size:clamp(11px,1.8vw,18px);
+  line-height:1.55;
   font-weight:bold;
   letter-spacing:1px;
   color:transparent;
@@ -126,22 +124,20 @@ h3 { color:var(--gold); }
   text-align:center;
 }
 
-.panel.done {
-  border-color:#8fc8ac;
-}
+.panel.done { border-color:#8fc8ac; }
 
 .panelhead {
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:10px;
   margin-bottom:20px;
 }
 
 .panelhead h2 {
   margin:0;
-  font-size:clamp(17px,2.5vw,25px);
   text-align:left;
+  font-size:clamp(17px,2.5vw,25px);
 }
 
 .count {
@@ -158,14 +154,19 @@ h3 { color:var(--gold); }
 }
 
 .lamp {
+  display:grid;
+  place-items:center;
   aspect-ratio:1;
   border:2px solid #81909c;
   border-radius:18px;
   background:#27333d;
-  display:grid;
-  place-items:center;
   padding:0;
   cursor:pointer;
+}
+
+.lamp.on {
+  background:#59482d;
+  border-color:var(--gold);
 }
 
 .lamp:focus-visible {
@@ -179,11 +180,6 @@ h3 { color:var(--gold); }
   border-radius:50%;
   background:#667782;
   box-shadow:inset 0 2px 6px #17212b;
-}
-
-.lamp.on {
-  background:#59482d;
-  border-color:var(--gold);
 }
 
 .lamp.on .bulb {
@@ -202,30 +198,22 @@ h3 { color:var(--gold); }
   color:var(--muted);
 }
 
-/* GEHEIMER FUNKSPRUCH */
+/* FREISCHALTUNG */
 
 .bottom {
+  margin-top:24px;
+  padding:24px;
   background:var(--panel);
   border:1px solid var(--border);
   border-radius:20px;
-  margin-top:24px;
-  padding:24px;
 }
 
 .bottom h2 { color:var(--gold); }
 
-.secret {
-  color:#ffe09a;
-  font-weight:bold;
-  font-size:clamp(20px,3vw,30px);
-  letter-spacing:1px;
-  overflow-wrap:anywhere;
-}
-
 .unlock {
   border-top:1px solid var(--border);
-  padding-top:22px;
   margin-top:24px;
+  padding-top:22px;
 }
 
 .document {
@@ -235,34 +223,39 @@ h3 { color:var(--gold); }
   margin:20px 0;
 }
 
+.secret {
+  color:#ffe09a;
+  font-weight:bold;
+  letter-spacing:1px;
+  font-size:clamp(20px,3vw,30px);
+  overflow-wrap:anywhere;
+}
+
 /* PAPIER-ENIGMA */
 
 .pdf-preview {
   display:block;
   width:100%;
   height:580px;
+  margin:16px 0;
   border:1px solid var(--border);
   border-radius:10px;
   background:#f4ead7;
-  margin:16px 0;
 }
 
-.download {
+.download,
+.back {
   display:inline-block;
-  background:var(--gold);
-  color:#17232d;
   padding:13px 19px;
   border-radius:10px;
+  background:var(--gold);
+  color:#17232d;
   font-weight:bold;
   text-decoration:none;
-  margin:10px 0;
 }
 
-.download:hover {
-  background:#f3d18d;
-}
-
-.checker {
+.checker,
+.bannerlink {
   color:#ffe09a;
   font-weight:bold;
 }
@@ -274,42 +267,30 @@ h3 { color:var(--gold); }
   margin:18px 0;
 }
 
-/* ERFOLGSBANNER */
-
 .bannerbox {
-  margin-top:32px;
-  padding:20px;
   background:var(--bg);
   border:1px solid var(--border);
   border-radius:12px;
   text-align:center;
+  padding:20px;
+  margin-top:32px;
 }
 
-.bannerbox h3 { margin-top:0; }
-
-.bannerlink {
-  display:inline-block;
-  color:#ffe09a;
-  font-weight:bold;
-  text-decoration:underline;
-  margin:10px 0;
-}
-
-/* BEDIENELEMENTE */
+/* STEUERUNG */
 
 .actions {
   display:flex;
   gap:12px;
   flex-wrap:wrap;
-  margin-top:18px;
+  margin-top:20px;
 }
 
 .action {
-  color:var(--text);
-  background:#465a68;
+  padding:11px 18px;
   border:1px solid #82939c;
   border-radius:12px;
-  padding:11px 18px;
+  background:#465a68;
+  color:var(--text);
   font-size:15px;
   font-weight:bold;
   cursor:pointer;
@@ -319,24 +300,13 @@ h3 { color:var(--gold); }
 
 .hint {
   display:none;
+  background:var(--bg);
+  border-left:3px solid var(--gold);
   margin-top:15px;
   padding:14px;
-  border-left:3px solid var(--gold);
-  background:var(--bg);
 }
 
-.back {
-  display:inline-block;
-  margin-top:24px;
-  padding:12px 18px;
-  color:#17232d;
-  background:var(--gold);
-  border-radius:10px;
-  font-weight:bold;
-  text-decoration:none;
-}
-
-/* DANKSAGUNG */
+.back { margin-top:24px; }
 
 .danksagung {
   margin-top:28px;
@@ -345,23 +315,18 @@ h3 { color:var(--gold); }
   border-left:4px solid var(--gold);
 }
 
-.danksagung h3 { margin-top:0; }
-.danksagung p { margin-bottom:0; }
-
 .footer {
+  margin-top:28px;
   text-align:center;
   color:var(--muted);
   font-size:12px;
   letter-spacing:2px;
-  margin-top:28px;
 }
 
 [hidden] { display:none !important; }
 
 @media(max-width:650px) {
-  .panels {
-    grid-template-columns:1fr;
-  }
+  .panels { grid-template-columns:1fr; }
   .panel { padding:16px; }
   .lights { max-width:340px; }
   .pdf-preview { height:430px; }
@@ -370,15 +335,21 @@ h3 { color:var(--gold); }
 @media(prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto; }
 }
+
+.lamp { position:relative; touch-action:manipulation; min-height:56px; }
+.lampnumber { position:absolute; bottom:4px; right:9px; color:var(--text); font-size:14px; font-weight:bold; }
+.action, .download, .back { min-height:48px; touch-action:manipulation; }
+a:focus-visible, .action:focus-visible { outline:3px solid white; outline-offset:3px; }
+@media(max-width:380px) { main { padding:16px 12px 32px; } .panel { padding:12px; } .lights { gap:8px; } .panelhead { flex-wrap:wrap; } .bottom { padding:16px; } }
+@media(prefers-reduced-motion:reduce) { * { scroll-behavior:auto !important; } }
 </style>
 </head>
 
 <body>
+<noscript><p>Bitte aktiviere JavaScript, um die Schalttafeln zu bedienen.</p></noscript>
 <main>
 
-<!-- ================================= -->
-<!-- AKTE 001                          -->
-<!-- ================================= -->
+<!-- AKTE 001 -->
 
 <div class="eyebrow">
   FUNKARCHIV // AKTE 001
@@ -386,77 +357,83 @@ h3 { color:var(--gold); }
 
 <h1>Der letzte Funkspruch</h1>
 
-<!-- FUNKRAUM-BILD MIT UNSICHTBARER BOTSCHAFT -->
+<!-- NEUES FUNKRAUM-BILD -->
 
 <div class="funkraum">
 
   <img
-    src="Stimmungsvoller%20Funkraum%20mit%20Enigma-Schaltpulten.png"
-    alt="Der verlassene Funkraum mit zwei Schalttafeln"
+    src="Historischer%20Funkraum%20mit%20Enigma-Papier.png"
+    alt="Funkraum mit Sender, Empfänger und Papier-Enigma"
     draggable="false">
+
+  <!-- VOLLSTÄNDIGE UNSICHTBARE ATBASH-BOTSCHAFT -->
 
   <div class="geheimnis">WRV VMRTNZ TRYG VH ZFXS RM VOVPGILMRHXSVM EZIRZMGVM. ZOOVIWRMTH NFHHG WF DRHHVM, DRV WF WRVHV IRXSGRT VRMHGVOOHG.</div>
 
 </div>
 
-<!-- ANLEITUNG -->
+<!-- SPIELREGELN -->
 
 <div class="rules">
 
-  <strong>Die beiden Schalttafeln</strong>
+  <strong>Die beiden gekoppelten Schalttafeln</strong>
 
   <p>
-    Beim Anklicken einer Lampe ändern sich ihr Zustand
-    und der ihrer direkten Nachbarn oben, unten,
-    links und rechts. Die diagonalen Nachbarn
-    bleiben unverändert.
+    Auf der linken Tafel (SENDER) verändert
+    ein Schalter seinen eigenen Zustand
+    und den seiner direkten Nachbarn oben,
+    unten, links und rechts.
   </p>
 
   <p>
-    Schaffst du es, beide Schalttafeln vollständig
-    dunkel zu schalten?
+    Zusätzlich schaltet er die Lampe
+    an derselben Position auf der rechten
+    Tafel (EMPFÄNGER) um.
+  </p>
+
+  <p>
+    Die Schalter des EMPFÄNGERS verändern
+    nur dessen eigene Lampen und ihre
+    direkten Nachbarn.
+    Diagonale Lampen bleiben unverändert.
   </p>
 
   <p>
     <strong>
-      Erst wenn alle Lichter erloschen sind,
-      wird die letzte Nachricht sichtbar.
+      Bringe alle 18 Lampen zum Erlöschen.
+      Erst dann wird der letzte Funkspruch sichtbar.
     </strong>
   </p>
 
 </div>
 
-<!-- JEWEILS GENAU NEUN LAMPEN -->
+<!-- BEIDE SCHALTTAFELN: JEWEILS 3 X 3 -->
 
 <section class="panels">
 
   <div class="panel" id="panel0">
 
     <div class="panelhead">
-      <h2>Schalttafel 1</h2>
+      <h2>SENDER</h2>
       <span class="count" id="count0"></span>
     </div>
 
     <div class="lights" id="lights0"></div>
 
-    <div class="panelstatus" id="status0">
-      Schalte alle Lampen aus.
-    </div>
+    <div class="panelstatus" id="status0"></div>
 
   </div>
 
   <div class="panel" id="panel1">
 
     <div class="panelhead">
-      <h2>Schalttafel 2</h2>
+      <h2>EMPFÄNGER</h2>
       <span class="count" id="count1"></span>
     </div>
 
     <div class="lights" id="lights1"></div>
 
-    <div class="panelstatus" id="status1">
-      Schalte alle Lampen aus.
-    </div>
+    <div class="panelstatus" id="status1"></div>
 
   </div>
 
@@ -470,15 +447,16 @@ h3 { color:var(--gold); }
     GEHEIMER FUNKSPRUCH
   </div>
 
-  <h2 id="messageTitle">
+  <h2 id="messageTitle" aria-live="polite">
     Die Nachricht ist noch verborgen
   </h2>
 
   <p id="messageText">
-    Die Schalttafeln warten auf deine Eingaben.
+    Erst wenn beide Schalttafeln vollständig
+    dunkel sind, wird die Nachricht freigegeben.
   </p>
 
-  <!-- AKTE 002 ERST NACH BEIDEN GELÖSTEN TAFELN -->
+  <!-- AKTE 002 ERST NACH DEM LÖSEN SICHTBAR -->
 
   <div id="akte2" class="unlock" hidden>
 
@@ -496,58 +474,43 @@ h3 { color:var(--gold); }
 
     </div>
 
-    <!-- MYSTERIÖSE SKIZZE -->
-
     <h3>Die mysteriöse Skizze</h3>
 
     <p>
       Mit dem Erlöschen der letzten Lampe
-      wird nicht nur die verschlüsselte Funknachricht
-      sichtbar. Auch ein weiteres Geheimnis des
-      verlassenen Funkraums offenbart sich.
+      wird die verschlüsselte Funknachricht
+      sichtbar. Jetzt ergibt auch das
+      vergilbte Enigma-Papier auf dem
+      Arbeitstisch einen Sinn.
     </p>
 
     <p>
-      Plötzlich ergibt auch das
-      <strong>vergilbte Papier auf dem alten
-      Arbeitstisch</strong> einen Sinn ...
+      Die Zeichnung zeigt eine ungewöhnliche
+      Vorrichtung mit drei verschiebbaren
+      Walzen und einem Reflektor:
+      eine Enigma aus Papier.
     </p>
 
     <p>
-      Es zeigt eine höchst ungewöhnliche Vorrichtung
-      mit drei verschiebbaren Walzen und einem Reflektor.
-      Offenbar handelt es sich um eine
-      <strong>Enigma aus Papier!</strong>
-    </p>
-
-    <p>
-      Die Skizze enthält sogar eine Bau-
+      Sie enthält sogar eine Bau-
       und Bedienungsanleitung.
     </p>
-
-    <!-- PAPIER-ENIGMA -->
 
     <div class="document">
 
       <h3>Die Papier-Enigma</h3>
 
       <p>
-        Diese Zeichnung könnte der Schlüssel
-        zur Entschlüsselung des letzten
-        Funkspruchs sein.
-      </p>
-
-      <p>
         Drucke die Vorlage aus, schneide
-        die Teile sorgfältig aus und
-        setze die Maschine gemäss Anleitung zusammen.
+        die Teile sorgfältig aus und setze
+        sie gemäss Anleitung zusammen.
       </p>
 
     </div>
 
     <p>
-      Hier kannst du die Vorlage direkt ansehen,
-      ausdrucken oder herunterladen.
+      Hier kannst du die Vorlage direkt
+      ansehen, ausdrucken oder herunterladen.
     </p>
 
     <!-- PDF-VORSCHAU -->
@@ -562,15 +525,19 @@ h3 { color:var(--gold); }
     <!-- PDF-DOWNLOAD -->
 
     <p>
+
       <a
         class="download"
         href="Enigma_Funkspruch_final.pdf"
         download="Enigma_Funkspruch_final.pdf">
+
         &#8595; Papier-Enigma herunterladen (PDF)
+
       </a>
+
     </p>
 
-    <!-- CHECKER UND RÜCKKEHRPUNKT -->
+    <!-- CERTITUDE-CHECKER -->
 
     <h3 id="checker">Dein letzter Auftrag</h3>
 
@@ -581,24 +548,29 @@ h3 { color:var(--gold); }
     </p>
 
     <p>
+
       <a
         class="checker"
         href="https://www.certitudes.org/certitude?wp=GCBZJCH"
         target="_blank"
         rel="noopener noreferrer">
+
         &#10003; Lösung mit Certitude überprüfen
+
       </a>
+
     </p>
 
     <div class="checkerhinweis">
 
       <strong>Hinweis:</strong>
-      Der Checker öffnet sich in einem neuen Browser-Tab.
+      Der Checker öffnet sich in einem neuen
+      Browser-Tab.
 
       <p>
         Nach erfolgreicher Prüfung kehrst du
-        einfach zum Funkarchiv zurück.
-        Dort wartet auch dein Erfolgsbanner!
+        zum Funkarchiv zurück.
+        Dort findest du auch den Erfolgsbanner.
       </p>
 
     </div>
@@ -611,23 +583,27 @@ h3 { color:var(--gold); }
 
       <p>
         Du hast den letzten Funkspruch
-        entschlüsselt und den Geocache gefunden?
-      </p>
-
-      <p>
+        entschlüsselt und den Cache gefunden?
         Herzlichen Glückwunsch!
-        Als Erinnerung an deine erfolgreiche Mission
-        darfst du unseren Banner gerne in deinem
-        persönlichen Geocaching-Profil verwenden.
       </p>
 
       <p>
+        Als Erinnerung an deine erfolgreiche
+        Mission darfst du den Banner gerne
+        in deinem Geocaching-Profil verwenden.
+      </p>
+
+      <p>
+
         <a
           class="bannerlink"
           href="banner.html">
+
           &#9733; Erfolgsbanner herunterladen
           und HTML-Code kopieren
+
         </a>
+
       </p>
 
     </div>
@@ -642,38 +618,47 @@ h3 { color:var(--gold); }
       class="action"
       type="button"
       onclick="resetGame()">
+
       &#8635; Neu beginnen
+
     </button>
 
     <button
       class="action"
       type="button"
+      aria-controls="hint"
+      aria-expanded="false"
       id="hintButton"
       onclick="toggleHint()">
+
       Hinweis anzeigen
+
     </button>
 
   </div>
 
+  <!-- NEUER, SUBTILER HINWEIS -->
+
   <div class="hint" id="hint">
-
-    Beim Drücken einer Lampe werden nur diese
-    und ihre unmittelbaren Nachbarn umgeschaltet.
-
-    Überlege, welche Lampen du nur durch einen
-    bestimmten Schalter erreichen kannst.
-
+    Nicht jedes Signal bleibt dort, wo es entsteht.
+    Manchmal hört jemand mit.
   </div>
 
-  <a
-    class="back"
-    href="https://coord.info/GCBZJCH">
-    &#8592; Zurück zum Geocaching-Listing
-  </a>
+  <p>
+
+    <a
+      class="back"
+      href="https://coord.info/GCBZJCH">
+
+      &#8592; Zurück zum Geocaching-Listing
+
+    </a>
+
+  </p>
 
 </section>
 
-<!-- DANKSAGUNG IMMER SICHTBAR -->
+<!-- DANKSAGUNG -->
 
 <div class="danksagung">
 
@@ -683,8 +668,8 @@ h3 { color:var(--gold); }
     Ein herzliches Dankeschön an
     <strong>das-Sugus</strong>
     für den erfolgreichen Betatest und
-    die wertvolle Unterstützung bei der
-    Fertigstellung dieses Rätsels!
+    die wertvolle Unterstützung bei
+    der Fertigstellung dieses Rätsels!
   </p>
 
 </div>
@@ -696,56 +681,47 @@ h3 { color:var(--gold); }
 </main>
 
 <script>
+"use strict";
 
-/* ======================================= */
-/* DAUERHAFTE SPEICHERUNG IM BROWSER        */
-/* ======================================= */
+/*
+  SENDER UND EMPFÄNGER – Mechanik unverändert aus test-kombiniert.html
 
-const STORAGE_KEY =
-  "funkspruch-gcbzjch-spielstand-v2";
+  LAMPENPOSITIONEN:
+
+       1  2  3
+       4  5  6
+       7  8  9
+
+  Die Startstellungen entsprechen
+  dem neuen Funkraum-Bild.
+*/
 
 const initial = [
-  [0,1,1,1,1,1,0,1,0],
-  [1,1,0,1,1,0,0,1,1]
+
+  // SENDER: 1, 3, 5, 7, 8, 9 an
+  [1,0,1, 0,1,0, 1,1,1],
+
+  // EMPFÄNGER: 2, 3, 4, 6, 8 an
+  [0,1,1, 1,0,1, 0,1,0]
+
 ];
 
+/* TESTSPIELSTAND SEPARAT SPEICHERN */
+
+const STORAGE_KEY =
+  "gcbzjch-sender-empfaenger-final-v1";
+
 let boards = initial.map(board => [...board]);
+
 let previouslyUnlocked = false;
 
-/* GESPEICHERTEN SPIELSTAND LADEN */
+/* GELÖSTE TAFEL ERKENNEN */
 
-function loadGame() {
+function isSolved(index) {
 
-  try {
-
-    const saved = localStorage.getItem(STORAGE_KEY);
-
-    if (!saved) return;
-
-    const data = JSON.parse(saved);
-
-    const valid =
-      Array.isArray(data) &&
-      data.length === 2 &&
-      data.every(board =>
-        Array.isArray(board) &&
-        board.length === 9 &&
-        board.every(value =>
-          value === 0 || value === 1
-        )
-      );
-
-    if (valid) {
-
-      boards = data.map(board => [...board]);
-
-    }
-
-  } catch (error) {
-
-    boards = initial.map(board => [...board]);
-
-  }
+  return boards[index].every(
+    value => value === 0
+  );
 
 }
 
@@ -760,32 +736,61 @@ function saveGame() {
       JSON.stringify(boards)
     );
 
-  } catch (error) {
+  } catch(error) {
 
-    /* Auch ohne Speicherung spielbar */
+    // Das Spiel funktioniert auch ohne Speicherung.
 
   }
 
 }
 
-/* PRÜFEN, OB EINE TAFEL GELÖST IST */
+/* SPIELSTAND LADEN */
 
-function isSolved(index) {
+function loadGame() {
 
-  return boards[index].every(
-    value => value === 0
-  );
+  try {
+
+    const saved = JSON.parse(
+      localStorage.getItem(STORAGE_KEY)
+    );
+
+    const valid =
+      Array.isArray(saved) &&
+      saved.length === 2 &&
+      saved.every(board =>
+        Array.isArray(board) &&
+        board.length === 9 &&
+        board.every(value =>
+          value === 0 || value === 1
+        )
+      );
+
+    if(valid) {
+
+      boards = saved.map(
+        board => [...board]
+      );
+
+    }
+
+  } catch(error) {
+
+    boards = initial.map(
+      board => [...board]
+    );
+
+  }
 
 }
 
-/* LAMPE UND DIREKTE NACHBARN UMSCHALTEN */
+/* LAMPE UND DIREKTE NACHBARN */
 
-function toggleLamp(boardIndex, lampIndex) {
+function toggleNeighborhood(boardIndex,lampIndex) {
 
   const row = Math.floor(lampIndex / 3);
   const col = lampIndex % 3;
 
-  const neighbors = [
+  const positions = [
     [row,col],
     [row-1,col],
     [row+1,col],
@@ -793,9 +798,9 @@ function toggleLamp(boardIndex, lampIndex) {
     [row,col+1]
   ];
 
-  neighbors.forEach(([r,c]) => {
+  positions.forEach(([r,c]) => {
 
-    if (
+    if(
       r >= 0 &&
       r < 3 &&
       c >= 0 &&
@@ -808,6 +813,26 @@ function toggleLamp(boardIndex, lampIndex) {
 
   });
 
+}
+
+/* GEKOPPELTE SCHALTMECHANIK */
+
+function pressLamp(boardIndex,lampIndex) {
+
+  // Eigene Tafel: Schalter plus Nachbarn.
+  toggleNeighborhood(boardIndex,lampIndex);
+
+  if(boardIndex === 0) {
+
+    // SENDER wirkt zusätzlich auf den EMPFÄNGER,
+    // dort aber nur auf dieselbe Lampenposition.
+
+    boards[1][lampIndex] ^= 1;
+
+  }
+
+  // EMPFÄNGER hat keine Rückwirkung.
+
   saveGame();
   render();
 
@@ -817,6 +842,9 @@ function toggleLamp(boardIndex, lampIndex) {
 
 function render() {
 
+  const active = document.activeElement;
+  const focusBoard = active?.dataset?.board;
+  const focusLamp = active?.dataset?.lamp;
   boards.forEach((board,boardIndex) => {
 
     const container =
@@ -831,14 +859,16 @@ function render() {
       const button =
         document.createElement("button");
 
+      button.type = "button";
+      button.dataset.board = boardIndex;
+      button.dataset.lamp = lampIndex;
+
       button.className =
         "lamp" + (value ? " on" : "");
 
-      button.type = "button";
-
       button.setAttribute(
         "aria-label",
-        "Schalttafel " + (boardIndex+1) +
+        (boardIndex === 0 ? "Sender" : "Empfänger") +
         ", Lampe " + (lampIndex+1) +
         (value
           ? ", eingeschaltet"
@@ -850,11 +880,18 @@ function render() {
 
       bulb.className = "bulb";
 
+      bulb.setAttribute("aria-hidden", "true");
       button.appendChild(bulb);
+      const number = document.createElement("span");
+      number.className = "lampnumber";
+      number.textContent = lampIndex + 1;
+      number.setAttribute("aria-hidden", "true");
+      button.appendChild(number);
+      button.setAttribute("aria-pressed", String(Boolean(value)));
 
-      button.addEventListener("click", () => {
+      button.addEventListener("click",() => {
 
-        toggleLamp(boardIndex,lampIndex);
+        pressLamp(boardIndex,lampIndex);
 
       });
 
@@ -887,7 +924,10 @@ function render() {
 
   });
 
-  /* BEIDE TAFELN MÜSSEN GELÖST SEIN */
+  if (focusBoard !== undefined) {
+    document.querySelector('[data-board="'+focusBoard+'"][data-lamp="'+focusLamp+'"]')?.focus({preventScroll:true});
+  }
+  /* BEIDE TAFELN MÜSSEN DUNKEL SEIN */
 
   const bothSolved =
     isSolved(0) && isSolved(1);
@@ -901,36 +941,38 @@ function render() {
   document.getElementById(
     "messageText"
   ).textContent = bothSolved
-    ? "Alle Lampen sind erloschen. Ein weiteres Dokument wurde freigegeben."
-    : "Erst wenn beide Schalttafeln dunkel sind, wird die letzte Nachricht sichtbar.";
+    ? "Alle Lampen sind erloschen. Die letzte Nachricht wurde freigegeben."
+    : "Erst wenn beide Schalttafeln dunkel sind, erscheint die letzte Nachricht.";
 
-  /* AKTE 002 SICHTBAR ODER VERBORGEN */
+  /* AKTE 002 FREIGEBEN */
 
   document.getElementById(
     "akte2"
   ).hidden = !bothSolved;
 
-  /* PDF ERST NACH DEM LÖSEN LADEN */
+  /* PDF ERST NACH FREISCHALTUNG LADEN */
 
-  if (bothSolved) {
+  if(bothSolved) {
 
-    const preview =
-      document.getElementById("pdfPreview");
+    const pdf =
+      document.getElementById(
+        "pdfPreview"
+      );
 
-    if (!preview.getAttribute("src")) {
+    if(!pdf.getAttribute("src")) {
 
-      preview.setAttribute(
+      pdf.setAttribute(
         "src",
-        preview.getAttribute("data-src")
+        pdf.getAttribute("data-src")
       );
 
     }
 
   }
 
-  /* NACH ERSTMALIGER FREISCHALTUNG */
+  /* NACH DEM LÖSEN ZUR AKTE 002 */
 
-  if (
+  if(
     bothSolved &&
     !previouslyUnlocked &&
     window.location.hash !== "#checker"
@@ -948,7 +990,7 @@ function render() {
 
 }
 
-/* NEU BEGINNEN: SPIELSTAND LÖSCHEN */
+/* NEU BEGINNEN */
 
 function resetGame() {
 
@@ -960,15 +1002,20 @@ function resetGame() {
 
     localStorage.removeItem(STORAGE_KEY);
 
-  } catch (error) {
-
-    /* Keine Aktion erforderlich */
-
-  }
+  } catch(error) {}
 
   previouslyUnlocked = false;
+  document.getElementById("hintButton").setAttribute("aria-expanded", "false");
 
-  if (window.location.hash === "#checker") {
+  document.getElementById(
+    "hint"
+  ).style.display = "none";
+
+  document.getElementById(
+    "hintButton"
+  ).textContent = "Hinweis anzeigen";
+
+  if(window.location.hash === "#checker") {
 
     history.replaceState(
       null,
@@ -979,14 +1026,6 @@ function resetGame() {
 
   }
 
-  document.getElementById(
-    "hint"
-  ).style.display = "none";
-
-  document.getElementById(
-    "hintButton"
-  ).textContent = "Hinweis anzeigen";
-
   render();
 
   window.scrollTo({
@@ -996,7 +1035,7 @@ function resetGame() {
 
 }
 
-/* HINWEIS EIN- UND AUSBLENDEN */
+/* HINWEIS ANZEIGEN ODER VERBERGEN */
 
 function toggleHint() {
 
@@ -1012,47 +1051,39 @@ function toggleHint() {
   hint.style.display =
     visible ? "none" : "block";
 
+  button.setAttribute("aria-expanded", String(!visible));
   button.textContent = visible
     ? "Hinweis anzeigen"
     : "Hinweis verbergen";
 
 }
 
-/* ======================================= */
-/* START                                    */
-/* ======================================= */
+/* SPIEL STARTEN */
 
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const originalScroll = Element.prototype.scrollIntoView;
+  Element.prototype.scrollIntoView = function(options) { return originalScroll.call(this, {...options, behavior:'auto'}); };
+}
 loadGame();
 render();
 
-/* RÜCKKEHR VOM ERFOLGSBANNER */
+/* RÜCKKEHR ZUM CHECKER */
 
-if (window.location.hash === "#checker") {
+if(
+  window.location.hash === "#checker" &&
+  isSolved(0) &&
+  isSolved(1)
+) {
 
-  if (isSolved(0) && isSolved(1)) {
+  requestAnimationFrame(() => {
 
-    requestAnimationFrame(() => {
+    document.getElementById("checker")
+      .scrollIntoView({
+        behavior:"auto",
+        block:"start"
+      });
 
-      document.getElementById("checker")
-        .scrollIntoView({
-          behavior:"auto",
-          block:"start"
-        });
-
-    });
-
-  } else {
-
-    /* AKTE 002 BLEIBT OHNE LÖSUNG GESPERRT */
-
-    history.replaceState(
-      null,
-      "",
-      window.location.pathname +
-      window.location.search
-    );
-
-  }
+  });
 
 }
 
