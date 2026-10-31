@@ -2690,14 +2690,9 @@ draw();
     localStorage.setItem(probeKey, "1");
     localStorage.removeItem(probeKey);
     storage = localStorage;
-    const savedState = storage.getItem(storageKey);
-    if (savedState != null) {
-      try {
-        state = parseState(savedState);
-      } catch {
-        // Invalid saved state does not disable future writes.
-      }
-    }
+    // Every newly opened page starts with an unsolved stage.
+    storage.removeItem(storageKey);
+    state = null;
   } catch {
     storage = null;
   }
@@ -2716,6 +2711,9 @@ draw();
   if (isShare) {
     globalThis.addEventListener("pagehide", persistSize);
   }
+  globalThis.addEventListener("pageshow", (event) => {
+    if (event.persisted) globalThis.location.reload();
+  });
   const initialGlobals = {
     widgetState: state,
     statePersistence: storage == null ? "none" : "local",
