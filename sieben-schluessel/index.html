@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Sieben Schlüssel, fünf Kerben und ein Schloss. Finde das passende Paar.">
+<title>Der Schlüsselmacher</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #2e271d;
+  --muted: #665b4a;
+  --paper: #fbf6e9;
+  --line: #dfd2b8;
+  --gold: #85571c;
+  --dark: #29251e;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #efe7d5; color: var(--ink); font: 1rem/1.5 system-ui, sans-serif; }
+h1, h2, h3 { font-family: Georgia, serif; line-height: 1.1; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: 1100px; margin: auto; padding-inline: 24px; }
+header { color: #f9eed8; background: var(--dark); border-bottom: 4px solid #b98c4b; padding: 29px 0 32px; }
+.eyebrow { font-size: .73rem; font-weight: 750; text-transform: uppercase; letter-spacing: .17em; color: var(--gold); }
+header .eyebrow { color: #e6ba75; }
+h1 { font-size: clamp(2.35rem, 6vw, 4.05rem); font-weight: 500; margin: 5px 0 8px; }
+header .subtitle { color: #dfd0b7; font-size: 1.04rem; }
+main { display: grid; grid-template-columns: minmax(0, 1.47fr) minmax(0, 1fr); gap: 20px; padding-block: 23px 30px; align-items: start; }
+.panel { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px; box-shadow: 0 3px 12px #3324110a; }
+.heading { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 7px; }
+h2 { font-size: 1.65rem; margin-top: 2px; }
+h3 { font-size: 1.24rem; }
+.muted { color: var(--muted); font-size: .91rem; }
+.count { flex: none; border: 1px solid var(--line); border-radius: 100px; padding: 3px 9px; font-size: .82rem; font-variant-numeric: tabular-nums; }
+.keys { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 14px; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 3px solid #245c78; outline-offset: 3px; }
+.key { background: #fffaf0; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); padding: 7px 8px 6px; min-width: 0; text-align: left; }
+.key:hover:not([aria-disabled="true"]) { border-color: var(--gold); }
+.key[aria-pressed="true"] { border-color: var(--gold); background: #f4e4c4; box-shadow: inset 0 0 0 1px var(--gold); }
+.key[aria-disabled="true"] { cursor: default; background: #f7f1e4; }
+.key-label { display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: .87rem; }
+.mark { width: 1.12rem; height: 1.12rem; border: 1px solid #b5a487; border-radius: 4px; text-align: center; line-height: 1; color: transparent; }
+.key[aria-pressed="true"] .mark { background: var(--gold); border-color: var(--gold); color: white; }
+.key-figure { display: block; width: 100%; max-height: 35px; margin-top: 1px; }
+.key-figure path { fill: #c39350; stroke: #6c491e; stroke-width: 1.4; }
+.key-figure circle { fill: #fffaf0; stroke: #6c491e; stroke-width: 1.4; }
+.values { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); text-align: center; font-variant-numeric: tabular-nums; }
+.key .values { margin-left: 25%; font-size: .79rem; color: var(--muted); }
+.combination { margin-top: 15px; padding-top: 13px; border-top: 1px solid var(--line); }
+.combination .heading { align-items: baseline; }
+.slots { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; margin-top: 8px; }
+.slot { display: grid; grid-template-rows: auto 23px auto; justify-items: center; align-items: start; background: #f4ecdc; border: 1px solid var(--line); border-radius: 6px; padding: 3px; font-size: .73rem; color: var(--muted); }
+.groove { width: 63%; height: calc(5px * var(--depth)); background: #b2844b; border-radius: 0 0 3px 3px; }
+.has-profile .groove { border-top: 2px solid #85571c; box-sizing: content-box; }
+.slot strong { color: var(--ink); font-size: 1rem; line-height: 1.15; }
+.lock-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 13px; }
+.lock-icon { width: 48px; height: 48px; background: #f3e6cc; color: #795017; border: 1px solid var(--line); padding: 8px; border-radius: 10px; flex: none; }
+.lock-icon path, .lock-icon rect { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.lock-icon .open { display: none; }
+.solved .lock-icon { background: #e3eddf; color: #365835; }
+.solved .lock-icon .closed { display: none; }
+.solved .lock-icon .open { display: inline; }
+.clues { margin: 8px 0 0; padding: 0; list-style: none; counter-reset: clue; }
+.clues li { counter-increment: clue; display: grid; grid-template-columns: 1.55rem 1fr; gap: 9px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: .94rem; }
+.clues li::before { content: counter(clue, decimal-leading-zero); color: var(--gold); font-size: .73rem; font-weight: 750; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+.action { border: 1px solid var(--line); border-radius: 7px; padding: 8px 12px; background: transparent; color: var(--ink); font-weight: 650; }
+.primary { background: #593b20; border-color: #593b20; color: #fff9ee; }
+.primary:hover:not(:disabled) { background: #402915; }
+.primary:disabled { background: #e7dcc7; border-color: #e7dcc7; color: #625847; cursor: default; }
+.action:not(.primary):hover { background: #f1e6d2; }
+.feedback { margin-top: 10px; padding: 8px 10px; border-radius: 6px; background: #f3ecdf; color: var(--muted); font-size: .9rem; }
+.feedback[data-state="miss"] { color: #784327; background: #f5e4d5; }
+.feedback[data-state="hit"] { color: #2b542f; background: #e5efdf; font-weight: 700; }
+@media (max-width: 720px) {
+  main { grid-template-columns: 1fr; gap: 13px; padding-block: 15px 22px; }
+  .wrap { padding-inline: 14px; }
+  .panel { padding: 14px; }
+  header { padding-block: 19px 21px; }
+}
+@media (max-width: 360px) {
+  .keys { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Geocaching · Mystery-Rätsel</p>
+    <h1>Der Schlüsselmacher</h1>
+    <p class="subtitle">Sieben Schlüssel, fünf Kerben und ein Schloss. Welches Paar öffnet es?</p>
+  </div>
+</header>
+<main class="wrap">
+  <section class="panel" aria-labelledby="workbench">
+    <div class="heading">
+      <div><p class="eyebrow">Werkbank</p><h2 id="workbench">Die sieben Schlüssel</h2></div>
+      <span class="count" id="count" aria-live="polite">0 von 2</span>
+    </div>
+    <p class="muted">Wähle zwei Schlüssel. Lies die fünf Kerben von links nach rechts. Ihre Tiefe reicht von 0 (keine Kerbe) bis 4 (am tiefsten).</p>
+    <div class="keys" id="keys" role="group" aria-label="Schlüssel auswählen"></div>
+    <div class="combination">
+      <div class="heading"><h3>Kombiniertes Profil</h3><span class="muted" id="pair">—</span></div>
+      <p class="muted">Pro Position gilt: grössere Tiefe minus kleinere Tiefe.</p>
+      <div class="slots" id="profile" aria-live="polite" aria-atomic="true"></div>
+    </div>
+  </section>
+  <section class="panel" id="lock-panel" aria-labelledby="lock-title">
+    <div class="lock-heading">
+      <svg class="lock-icon" viewBox="0 0 32 32" aria-hidden="true">
+        <path class="closed" d="M9 14V9a7 7 0 0 1 14 0v5"/>
+        <path class="open" d="M9 14V9a7 7 0 0 1 13-3"/>
+        <rect x="5" y="14" width="22" height="15" rx="3"/>
+        <path d="M16 20v4"/>
+      </svg>
+      <div><p class="eyebrow">Eiserne Kassette</p><h2 id="lock-title">Das Schloss</h2></div>
+    </div>
+    <p class="muted">Alle drei Hinweise beziehen sich auf das kombinierte Profil.</p>
+    <ol class="clues">
+      <li>Kerbe 1 ist flacher als Kerbe 5.</li>
+      <li>Kerbe 2 ist tiefer als Kerbe 1.</li>
+      <li>Kerbe 3 ist tiefer als Kerbe 4.</li>
+    </ol>
+    <div class="actions">
+      <button class="action primary" id="try" type="button" disabled>Schloss prüfen</button>
+      <button class="action" id="reset" type="button">Zurücksetzen</button>
+    </div>
+    <p class="feedback" id="feedback" role="status">Das Schloss ist geschlossen.</p>
+  </section>
+</main>
+<noscript><p class="wrap">Aktiviere JavaScript, um die Schlüssel auszuwählen und das Schloss zu prüfen.</p></noscript>
+<script>
+'use strict';
+
+const keys = [
+  { name: 'A', depths: [1, 3, 1, 3, 4] },
+  { name: 'B', depths: [2, 1, 0, 2, 0] },
+  { name: 'C', depths: [2, 1, 0, 0, 4] },
+  { name: 'D', depths: [2, 3, 3, 2, 4] },
+  { name: 'E', depths: [1, 1, 4, 2, 4] },
+  { name: 'F', depths: [1, 0, 3, 1, 3] },
+  { name: 'G', depths: [4, 4, 1, 1, 0] },
+];
+
+function combine(first, second) {
+  return first.depths.map((depth, index) => Math.abs(depth - second.depths[index]));
+}
+
+function fitsLock([first, second, third, fourth, fifth]) {
+  return first < fifth && second > first && third > fourth;
+}
+
+const selected = new Set();
+const keyList = document.querySelector('#keys');
+const count = document.querySelector('#count');
+const pairLabel = document.querySelector('#pair');
+const profile = document.querySelector('#profile');
+const check = document.querySelector('#try');
+const reset = document.querySelector('#reset');
+const lock = document.querySelector('#lock-panel');
+const feedback = document.querySelector('#feedback');
+
+function keyShape(depths) {
+  const cuts = depths.map((depth, index) => {
+    const left = 33 + index * 18;
+    const bottom = 10 + depth * 3;
+    return `H${left} L${left + 4} ${bottom} H${left + 13} L${left + 17} 10`;
+  }).join(' ');
+  return `<svg class="key-figure" viewBox="0 0 128 34" aria-hidden="true">
+    <path d="M28 10 ${cuts} L125 14 V24 L121 27 H28 C21 37 3 32 3 18 C3 4 20 0 28 10 Z"/>
+    <circle cx="15" cy="18" r="5"/>
+  </svg>`;
+}
+
+const buttons = keys.map(key => {
+  const button = document.createElement('button');
+  button.className = 'key';
+  button.type = 'button';
+  button.setAttribute('aria-label', `Schlüssel ${key.name}, Kerbentiefen ${key.depths.join(', ')}`);
+  button.innerHTML = `<span class="key-label">${key.name}<span class="mark" aria-hidden="true">✓</span></span>
+    ${keyShape(key.depths)}
+    <span class="values" aria-hidden="true">${key.depths.map(depth => `<span>${depth}</span>`).join('')}</span>`;
+  button.addEventListener('click', () => {
+    if (selected.has(key)) selected.delete(key);
+    else if (selected.size < 2) selected.add(key);
+    else return;
+    render();
+  });
+  keyList.append(button);
+  return button;
+});
+
+function render() {
+  const pair = keys.filter(key => selected.has(key));
+  const ready = pair.length === 2;
+  const depths = ready ? combine(...pair) : Array(5).fill(null);
+  count.textContent = `${pair.length} von 2`;
+  pairLabel.textContent = pair.map(key => key.name).join(' + ') || '—';
+  buttons.forEach((button, index) => {
+    const active = selected.has(keys[index]);
+    button.setAttribute('aria-pressed', String(active));
+    button.setAttribute('aria-disabled', String(ready && !active));
+  });
+  profile.classList.toggle('has-profile', ready);
+  profile.innerHTML = depths.map((depth, index) => `<div class="slot">
+    <span aria-label="Kerbe ${index + 1}">${index + 1}</span>
+    <span class="groove" style="--depth:${depth ?? 0}" aria-hidden="true"></span>
+    <strong>${depth ?? '–'}</strong>
+  </div>`).join('');
+  check.disabled = !ready;
+  setFeedback('', 'Das Schloss ist geschlossen.');
+}
+
+function setFeedback(state, message) {
+  lock.classList.toggle('solved', state === 'hit');
+  feedback.dataset.state = state;
+  feedback.textContent = message;
+}
+
+check.addEventListener('click', () => {
+  if (selected.size !== 2) return;
+  const depths = combine(...selected);
+  if (fitsLock(depths)) {
+    setFeedback('hit', 'Das Schloss ist offen! In der Kassette stehen die fehlenden Ziffern. Nord = 276 · Ost = 499');
+  } else {
+    setFeedback('miss', 'Das Schloss bleibt zu. Dieses Profil erfüllt die drei Hinweise nicht gleichzeitig.');
+  }
+});
+
+reset.addEventListener('click', () => {
+  selected.clear();
+  render();
+  buttons[0].focus();
+});
+
+render();
+</script>
+</body>
+</html>
