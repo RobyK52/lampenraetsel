@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Die falsche Münze</title>
+<style>
+  :root { color-scheme:light dark; --background:light-dark(#fbf5e8,#211a16); --foreground:light-dark(#30231d,#f5e9d5); --muted:light-dark(#efe2cb,#382a20); --border:light-dark(#c9ac83,#74563e); --orange:light-dark(#a45224,#d89052); --action:light-dark(#713e23,#edb67e); --action-text:light-dark(#fff8ee,#291c14); }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--background); color:var(--foreground); font:1rem/1.5 system-ui,sans-serif }
+  main { max-width:46rem; margin:auto; padding:clamp(.75rem,3vw,2rem) }
+  h2,h3,p { margin:0 }
+  h2 { font-size:clamp(1.65rem,5vw,2.35rem) }
+  .viz-row { display:flex; align-items:center; gap:.55rem; flex-wrap:wrap }
+  .card { background:var(--muted); border:1px solid var(--border); border-radius:.6rem; padding:.75rem }
+  .btn,.form-select { font:inherit; color:inherit; border:1px solid var(--border); background:var(--background); border-radius:.45rem; min-height:44px; padding:.4rem .65rem }
+  .btn,summary { cursor:pointer }
+  .btn[disabled] { opacity:.58; cursor:default }
+  .btn-primary:not(:disabled),.btn[aria-pressed="true"] { background:var(--action); color:var(--action-text) }
+  .form-label { display:grid; gap:.2rem }
+  .text-small { font-size:.875rem }
+  .muenzen .btn { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.2rem; padding:.35rem .2rem }
+  .waage { overflow:visible }
+  .finalkoordinaten { font-size:clamp(1rem,5vw,1.4rem); font-weight:bold; margin-block:.25rem }
+  footer { border-top:1px solid var(--border); padding-top:.8rem }
+  a { color:inherit }
+  :focus-visible { outline:2px solid var(--orange); outline-offset:2px }
+</style>
+</head>
+<body>
+<main>
+<noscript><p>Aktiviere JavaScript, um das Rätsel zu spielen.</p></noscript>
+<section id="falsche-muenze" aria-label="Die falsche Münze">
+  <style>
+    #falsche-muenze, #falsche-muenze .ablauf { display:grid; gap:.8rem }
+    #falsche-muenze h2, #falsche-muenze h3 { font-family:Georgia,serif }
+    #falsche-muenze .werkstatt { display:grid; gap:.45rem; padding-block:.5rem .8rem; border-bottom:1px solid var(--border) }
+    #falsche-muenze .werkstatt .viz-row { justify-content:space-between }
+    #falsche-muenze .waagenstand { text-align:center }
+    #falsche-muenze [hidden] { display:none !important }
+    #falsche-muenze .muenzen { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.35rem }
+    #falsche-muenze .schalen { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem }
+    #falsche-muenze .schalen .card { display:grid; gap:.25rem }
+    #falsche-muenze .waage { display:block; width:min(100%,290px); margin:auto; color:var(--foreground) }
+    #falsche-muenze .balken { transform-origin:150px 31px; transition:transform .3s }
+    #falsche-muenze .links { transform:rotate(-9deg) }
+    #falsche-muenze .rechts { transform:rotate(9deg) }
+    #falsche-muenze ol { margin:0; padding-left:1.6rem }
+    #falsche-muenze .muenzen button { min-width:0 }
+    #falsche-muenze .muenze-praegung {
+      display:inline-grid; place-items:center; position:relative;
+      inline-size:2.55em; aspect-ratio:1; border-radius:50%;
+      color:var(--foreground);
+      background:radial-gradient(circle at 35% 26%, var(--background), color-mix(in srgb, var(--background) 78%, var(--orange)) 66%, var(--muted));
+      border:2px solid color-mix(in srgb, var(--orange) 65%, var(--foreground));
+      box-shadow:inset 0 0 0 2px var(--background);
+      font-family:Georgia,serif; font-variant-numeric:tabular-nums;
+    }
+    #falsche-muenze .muenze-praegung::before {
+      content:""; position:absolute; inset:4px; border-radius:50%;
+      border:1px dotted color-mix(in srgb, var(--orange) 65%, var(--foreground));
+      pointer-events:none;
+    }
+    #falsche-muenze .muenze-ausgeschlossen { opacity:.55; filter:grayscale(1); text-decoration:line-through }
+    #falsche-muenze [data-hinweis]:empty { display:none }
+    @media(max-width:460px) { #falsche-muenze .muenzen { grid-template-columns:repeat(4,minmax(0,1fr)) } }
+    @media(prefers-reduced-motion:reduce) { #falsche-muenze .balken { transition:none } }
+  </style>
+  <header class="werkstatt">
+    <div class="viz-row">
+      <h2>Die falsche Münze</h2>
+      <div class="viz-row">
+        <button class="btn" type="button" data-ton aria-pressed="false">Ton: aus</button>
+        <button class="btn" type="button" data-neu>Reset</button>
+      </div>
+    </div>
+    <p>In der Werkstattkasse liegen zwölf Münzen. Eine Fälschung ist schwerer oder leichter als die echten. Finde sie mit drei Wägungen.</p>
+  </header>
+  <div class="ablauf" data-spiel>
+    <p><strong data-rest>3 von 3 Wägungen übrig</strong></p>
+    <svg class="waage" viewBox="0 0 300 91" aria-hidden="true">
+      <path d="M120 84h60m-30 0V31" fill="none" stroke="currentColor" stroke-width="2"/>
+      <g class="balken">
+        <path d="M44 31h212M55 31l-14 27h28L55 31m190 0-14 27h28l-14-27" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M32 58h46q-6 13-23 13T32 58m190 0h46q-6 13-23 13t-23-13" fill="var(--muted)" stroke="currentColor" stroke-width="2"/>
+      </g>
+      <circle cx="150" cy="31" r="4" fill="currentColor"/>
+    </svg>
+    <p class="text-small waagenstand" data-stand aria-live="polite">Waage bereit</p>
+    <div class="schalen">
+      <div class="card"><strong>Linke Schale</strong><span data-links>Leer</span></div>
+      <div class="card"><strong>Rechte Schale</strong><span data-rechts>Leer</span></div>
+    </div>
+    <p data-anleitung>Klicke auf eine Münze: 1× links, 2× rechts, 3× «Kommt nicht infrage», 4× Markierung aufheben.</p>
+    <div class="muenzen" data-muenzen aria-label="Zwölf Münzen"></div>
+    <div class="viz-row">
+      <button class="btn btn-primary" type="button" data-wiegen disabled>Wiegen</button>
+      <span data-bereit aria-live="polite">Erste Wägung: Lege genau vier Münzen in jede Schale.</span>
+    </div>
+    <details data-protokoll open hidden>
+      <summary>Protokoll der Wägungen</summary>
+      <ol data-verlauf aria-label="Bisherige Wägungen"></ol>
+    </details>
+    <form class="viz-row" data-tipp hidden>
+      <label class="form-label">Falschmünze
+        <select class="form-select" data-auswahl required><option value="">Münze wählen …</option></select>
+      </label>
+      <label class="form-label">Gewicht
+        <select class="form-select" data-gewicht required>
+          <option value="">Gewicht wählen …</option>
+          <option value="1">Schwerer</option><option value="-1">Leichter</option>
+        </select>
+      </label>
+      <button class="btn" type="submit">Tipp abgeben</button>
+    </form>
+  </div>
+  <div class="ablauf card" data-kasse hidden>
+    <h3>Ehrenrunde Kassenbuch da dein Resultat falsch ist</h3>
+    <p>Drei der vier Quittungen ergeben zusammen <strong data-summe></strong>. Welche Quittung gehört nicht dazu?</p>
+    <div class="viz-row" data-quittungen></div>
+  </div>
+  <div class="card" data-sieg hidden>
+    <h3>Geheimfach geöffnet</h3>
+    <p data-fund></p>
+    <p>Finalkoordinaten</p>
+    <p class="finalkoordinaten" data-final></p>
+  </div>
+  <p data-hinweis role="status"></p>
+  <footer><a href="https://www.geocaching.com/geocache/GCC0W8B">Zurück zum Geocaching-Listing GCC0W8B</a></footer>
+</section>
+<script>
+(() => {
+  const game = document.getElementById('falsche-muenze');
+  const find = selector => game.querySelector(selector);
+  const coins = Array.from({length:12}, (_, i) => i + 1);
+  const labels = ['auf dem Tisch', 'links', 'rechts', 'kommt nicht infrage'];
+  const results = {'-1':'Rechts ist schwerer', '0':'Gleichgewicht', '1':'Links ist schwerer'};
+  const coinArea = find('[data-muenzen]');
+  const guess = find('[data-tipp]');
+  const weigh = find('[data-wiegen]');
+  const history = find('[data-verlauf]');
+  const feedback = find('[data-hinweis]');
+  const coinChoice = find('[data-auswahl]');
+  const weightChoice = find('[data-gewicht]');
+  const soundButton = find('[data-ton]');
+  let audio;
+  const sounds = {
+    coin:[[1480,0,.09],[2290,.015,.07]],
+    scale:[[185,0,.19],[270,.035,.14]],
+    lock:[[130,0,.17],[90,.09,.18]],
+    win:[[523,0,.27],[659,.13,.27],[784,.26,.39]]
+  };
+  function setSound(active) {
+    soundButton.setAttribute('aria-pressed', String(active));
+    soundButton.textContent = active ? 'Ton: an' : 'Ton: aus';
+  }
+  function playSound(name) {
+    if (soundButton.getAttribute('aria-pressed') !== 'true' || audio?.state !== 'running') return;
+    for (const [frequency, offset, duration] of sounds[name]) {
+      const start = audio.currentTime + offset;
+      const tone = audio.createOscillator();
+      const envelope = audio.createGain();
+      tone.type = 'sine';
+      tone.frequency.value = frequency;
+      envelope.gain.setValueAtTime(.0001, start);
+      envelope.gain.exponentialRampToValueAtTime(.1, start + .008);
+      envelope.gain.exponentialRampToValueAtTime(.0001, start + duration);
+      tone.connect(envelope).connect(audio.destination);
+      tone.start(start);
+      tone.stop(start + duration);
+    }
+  }
+  soundButton.addEventListener('click', async () => {
+    if (soundButton.getAttribute('aria-pressed') === 'true') {
+      setSound(false);
+      return;
+    }
+    try {
+      const AudioEngine = window.AudioContext || window.webkitAudioContext;
+      audio ??= new AudioEngine();
+      await audio.resume();
+      if (audio.state !== 'running') throw Error('Audio paused');
+      setSound(true);
+      feedback.textContent = '';
+      playSound('coin');
+    } catch {
+      feedback.textContent = 'Ton ist in diesem Browserfenster nicht verfügbar.';
+    }
+  });
+  const initial = (previous = -1) => {
+    const draw = Math.floor(Math.random() * (previous < 0 ? 24 : 23));
+    return {secret:draw >= previous && previous >= 0 ? draw + 1 : draw,
+      placements:coins.map(() => 0), rounds:[], phase:'play', receipt:null};
+  };
+  let state = initial();
+  const buttons = coins.map(number => {
+    coinChoice.add(new Option('Münze ' + number, number));
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'btn';
+    button.addEventListener('click', () => {
+      state.placements[number - 1] = (state.placements[number - 1] + 1) % 4;
+      playSound('coin');
+      render();
+      save();
+    });
+    coinArea.append(button);
+    return button;
+  });
+  const fake = candidate => Math.floor(candidate / 2) + 1;
+  const weight = candidate => candidate % 2 === 0 ? 1 : -1;
+  function outcomeFor(candidate, left, right) {
+    const coin = fake(candidate);
+    return (Number(left.includes(coin)) - Number(right.includes(coin))) * weight(candidate);
+  }
+  function weighBlock(left, right, remaining) {
+    if (!remaining) return 'Jetzt kannst du deinen Tipp abgeben.';
+    if (remaining === 3 && (left.length !== 4 || right.length !== 4)) {
+      return 'Erste Wägung: Lege genau vier Münzen in jede Schale.';
+    }
+    if (!left.length || left.length !== right.length) {
+      return 'Lege gleich viele Münzen in beide Schalen.';
+    }
+    return '';
+  }
+  const onPan = side => coins.filter(number => state.placements[number - 1] === side);
+  function renderCoin(index) {
+    const button = buttons[index];
+    const number = index + 1;
+    const place = state.placements[index];
+    const onScale = place === 1 || place === 2;
+    const face = document.createElement('span');
+    face.className = 'muenze-praegung';
+    face.textContent = String(number);
+    face.classList.toggle('muenze-ausgeschlossen', place === 3);
+    button.replaceChildren(face);
+    if (onScale) {
+      const side = document.createElement('span');
+      side.className = 'text-small';
+      side.textContent = place === 1 ? 'L' : 'R';
+      button.append(side);
+    }
+    button.setAttribute('aria-label', 'Münze ' + number + ', ' + labels[place]);
+    button.setAttribute('aria-pressed', String(onScale));
+  }
+  function render() {
+    const left = onPan(1);
+    const right = onPan(2);
+    const remaining = 3 - state.rounds.length;
+    find('[data-spiel]').hidden = state.phase !== 'play';
+    find('[data-kasse]').hidden = state.phase !== 'locked';
+    find('[data-sieg]').hidden = state.phase !== 'won';
+    find('[data-rest]').textContent = remaining + ' von 3 Wägungen übrig';
+    find('[data-links]').textContent = left.join(', ') || 'Leer';
+    find('[data-rechts]').textContent = right.join(', ') || 'Leer';
+    find('[data-anleitung]').hidden = remaining === 0;
+    coinArea.hidden = remaining === 0;
+    guess.hidden = remaining !== 0;
+    buttons.forEach((_, index) => renderCoin(index));
+    const block = weighBlock(left, right, remaining);
+    weigh.disabled = Boolean(block);
+    find('[data-bereit]').textContent = remaining < 3 && remaining > 0 && !left.length && !right.length
+      ? 'Verteile gleich viele Münzen auf die beiden Schalen.'
+      : block || 'Beide Schalen sind bereit.';
+    const last = state.rounds.at(-1)?.outcome;
+    find('.balken').classList.toggle('links', last === 1);
+    find('.balken').classList.toggle('rechts', last === -1);
+    const roundCount = state.rounds.length;
+    find('[data-stand]').textContent = roundCount
+      ? 'Wägung ' + roundCount + ' · ' + results[last]
+      : 'Waage bereit';
+    find('[data-protokoll]').hidden = roundCount === 0;
+    find('[data-final]').textContent = state.phase === 'won' ? 'N 47° 23.514′ E 008° 34.589′' : '';
+    if (state.phase === 'won') {
+      find('[data-fund]').textContent = 'Münze ' + fake(state.secret) + ' ist ' +
+        (weight(state.secret) === 1 ? 'schwerer' : 'leichter') + ' als die echten Münzen.';
+    }
+    history.replaceChildren(...state.rounds.map(round => {
+      const item = document.createElement('li');
+      item.textContent = 'Links ' + round.left.join(', ') + ' · rechts ' +
+        round.right.join(', ') + ' → ' + results[round.outcome];
+      return item;
+    }));
+  }
+  function save() {
+    try { sessionStorage.setItem('GCC0W8B', JSON.stringify(state)); } catch {}
+  }
+  function newRound() {
+    state = initial(state.secret);
+    guess.reset();
+    find('[data-protokoll]').open = true;
+    feedback.textContent = 'Du hast drei neue Wägungen.';
+    render();
+    buttons[0].focus();
+    save();
+  }
+  function showReceipts() {
+    const {amounts, wrong} = state.receipt;
+    find('[data-summe]').textContent = amounts.reduce((sum, value, i) =>
+      sum + (i === wrong ? 0 : value), 0) + ' Franken';
+    find('[data-quittungen]').replaceChildren(...amounts.map((amount, i) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'btn';
+      button.textContent = amount + ' Fr.';
+      button.addEventListener('click', () => {
+        if (i !== wrong) {
+          feedback.textContent = 'Diese Quittung gehört dazu. Prüfe die Summe der anderen drei.';
+          return;
+        }
+        newRound();
+      });
+      return button;
+    }));
+  }
+  find('[data-neu]').addEventListener('click', newRound);
+  weigh.addEventListener('click', () => {
+    if (weigh.disabled || state.phase !== 'play') return;
+    const left = onPan(1);
+    const right = onPan(2);
+    const outcome = outcomeFor(state.secret, left, right);
+    playSound('scale');
+    state.rounds.push({left,right,outcome});
+    state.placements = state.placements.map(place => place === 3 ? 3 : 0);
+    feedback.textContent = '';
+    render();
+    save();
+  });
+  guess.addEventListener('submit', event => {
+    event.preventDefault();
+    if (state.phase !== 'play' || state.rounds.length !== 3) return;
+    if (Number(coinChoice.value) === fake(state.secret) && Number(weightChoice.value) === weight(state.secret)) {
+      state.phase = 'won';
+      feedback.textContent = '';
+      playSound('win');
+    } else {
+      state.phase = 'locked';
+      playSound('lock');
+      const pool = Array.from({length:18}, (_, i) => i + 3);
+      const amounts = Array.from({length:4}, () =>
+        pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
+      state.receipt = {amounts,wrong:Math.floor(Math.random() * 4)};
+      feedback.textContent = 'Der Tipp war falsch. Löse die Kassenbuch-Aufgabe für einen neuen Versuch.';
+      showReceipts();
+    }
+    render();
+    if (state.phase === 'locked') find('[data-quittungen] button').focus();
+    if (state.phase === 'won') find('[data-neu]').focus();
+    save();
+  });
+  function restore(snapshot) {
+    const saved = snapshot;
+    if (!saved || !Number.isInteger(saved.secret) || saved.secret < 0 || saved.secret > 23 ||
+        saved.placements?.length !== 12 || !Array.isArray(saved.rounds) ||
+        !['play','locked','won'].includes(saved.phase) ||
+        (saved.phase === 'locked' && saved.receipt?.amounts?.length !== 4)) return;
+    state = structuredClone(saved);
+    if (state.phase === 'locked') showReceipts();
+    render();
+  }
+  render();
+  try { restore(JSON.parse(sessionStorage.getItem('GCC0W8B'))); } catch {}
+})();
+</script>
+
+</main>
+</body>
+</html>
