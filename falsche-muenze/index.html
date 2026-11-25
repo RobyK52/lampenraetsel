@@ -5,21 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Die falsche Münze</title>
 <style>
-  :root { color-scheme:light dark; --background:light-dark(#fbf5e8,#211a16); --foreground:light-dark(#30231d,#f5e9d5); --muted:light-dark(#efe2cb,#382a20); --border:light-dark(#c9ac83,#74563e); --orange:light-dark(#a45224,#d89052); --action:light-dark(#713e23,#edb67e); --action-text:light-dark(#fff8ee,#291c14); }
+  :root { color-scheme:light; --background:light-dark(#fbf5e8,#211a16); --foreground:light-dark(#30231d,#f5e9d5); --muted:light-dark(#efe2cb,#382a20); --border:light-dark(#c9ac83,#74563e); --orange:light-dark(#a45224,#d89052); --action:light-dark(#713e23,#edb67e); --action-text:light-dark(#fff8ee,#291c14); }
   * { box-sizing:border-box }
-  body { margin:0; background:var(--background); color:var(--foreground); font:1rem/1.5 system-ui,sans-serif }
-  main { max-width:46rem; margin:auto; padding:clamp(.75rem,3vw,2rem) }
+  body { margin:0; min-height:100vh; background:#271812; background-image:repeating-linear-gradient(103deg,#ffffff05 0 1px,transparent 2px 28px,#11080422 30px 33px),radial-gradient(ellipse at 48% 0,#64402b,#24150f 75%); color:var(--foreground); font:1rem/1.5 system-ui,sans-serif }
+  main { max-width:51rem; margin:clamp(.5rem,3vw,2rem) auto; padding:clamp(.8rem,4vw,2.25rem); border:1px solid #a87549; border-radius:clamp(.55rem,2vw,1.15rem); background:radial-gradient(ellipse at 15% 0,#fff9ea,#f6e9d3 72%); box-shadow:0 16px 60px #090503b3,inset 0 0 0 4px #a875491e }
   h2,h3,p { margin:0 }
-  h2 { font-size:clamp(1.65rem,5vw,2.35rem) }
+  h2 { font-size:clamp(1.8rem,5.5vw,2.85rem); line-height:1.1; letter-spacing:-.035em }
   .viz-row { display:flex; align-items:center; gap:.55rem; flex-wrap:wrap }
   .card { background:var(--muted); border:1px solid var(--border); border-radius:.6rem; padding:.75rem }
-  .btn,.form-select { font:inherit; color:inherit; border:1px solid var(--border); background:var(--background); border-radius:.45rem; min-height:44px; padding:.4rem .65rem }
+  .btn,.form-select { font:inherit; color:inherit; border:1px solid var(--border); background:linear-gradient(#fffaf0,#f2e3c9); box-shadow:0 2px 3px #56311d1e; border-radius:.45rem; min-height:44px; padding:.4rem .65rem }
   .btn,summary { cursor:pointer }
   .btn[disabled] { opacity:.58; cursor:default }
-  .btn-primary:not(:disabled),.btn[aria-pressed="true"] { background:var(--action); color:var(--action-text) }
+  .btn-primary:not(:disabled),.btn[aria-pressed="true"] { background:linear-gradient(#965a32,#64391f); color:var(--action-text) }
   .form-label { display:grid; gap:.2rem }
   .text-small { font-size:.875rem }
-  .muenzen .btn { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.2rem; padding:.35rem .2rem }
+  .muenzen .btn { position:relative; display:grid; place-items:center; padding:.45rem .2rem; background:linear-gradient(#38251d,#4b3227); border-color:#7a5742; box-shadow:inset 0 2px 5px #1b100dc9,0 1px 0 #fff2d3 }
+  .muenzen .btn[aria-pressed="true"] { background:linear-gradient(#754b30,#a47442); box-shadow:inset 0 0 0 2px #eaca8b,0 1px 0 #fff2d3 }
+  .muenzen .btn .text-small { position:absolute; inset:auto .13rem .08rem auto; min-width:1rem; border-radius:.2rem; background:#2b1911; color:#fff2d3; text-align:center; font-size:.72rem }
   .waage { overflow:visible }
   .finalkoordinaten { font-size:clamp(1rem,5vw,1.4rem); font-weight:bold; margin-block:.25rem }
   footer { border-top:1px solid var(--border); padding-top:.8rem }
@@ -36,24 +38,29 @@
     #falsche-muenze h2, #falsche-muenze h3 { font-family:Georgia,serif }
     #falsche-muenze .werkstatt { display:grid; gap:.45rem; padding-block:.5rem .8rem; border-bottom:1px solid var(--border) }
     #falsche-muenze .werkstatt .viz-row { justify-content:space-between }
-    #falsche-muenze .waagenstand { text-align:center }
+    #falsche-muenze .waagenstand { text-align:center; color:#ffedc7; font-weight:600 }
+    #falsche-muenze .wiegetisch { padding:.55rem .5rem .65rem; border-radius:.75rem; border:1px solid #84583c; background:radial-gradient(ellipse at 50% 36%,#68452e,#2c1c16 85%); box-shadow:inset 0 1px 8px #140c08,0 3px 8px #512d222e }
+    #falsche-muenze .schalen .card { background:linear-gradient(#f8ebcd,#ead4ae); box-shadow:inset 0 1px 0 #fff7e8,0 2px 5px #4d2f201a }
+    #falsche-muenze [data-protokoll],#falsche-muenze [data-tipp] { padding:.65rem .8rem; border:1px solid var(--border); border-radius:.5rem; background:#fff5df }
+    #falsche-muenze [data-tipp] { align-items:end }
+    #falsche-muenze [data-sieg] { border:2px solid #a57238; background:linear-gradient(130deg,#fff4d8,#e8c994); box-shadow:0 4px 14px #61391730 }
     #falsche-muenze [hidden] { display:none !important }
     #falsche-muenze .muenzen { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.35rem }
     #falsche-muenze .schalen { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem }
     #falsche-muenze .schalen .card { display:grid; gap:.25rem }
-    #falsche-muenze .waage { display:block; width:min(100%,290px); margin:auto; color:var(--foreground) }
-    #falsche-muenze .balken { transform-origin:150px 31px; transition:transform .3s }
+    #falsche-muenze .waage { display:block; width:min(100%,385px); margin:auto; color:#efcf8e }
+    #falsche-muenze .balken { transform-origin:150px 42px; transition:transform .3s }
     #falsche-muenze .links { transform:rotate(-9deg) }
     #falsche-muenze .rechts { transform:rotate(9deg) }
     #falsche-muenze ol { margin:0; padding-left:1.6rem }
     #falsche-muenze .muenzen button { min-width:0 }
     #falsche-muenze .muenze-praegung {
       display:inline-grid; place-items:center; position:relative;
-      inline-size:2.55em; aspect-ratio:1; border-radius:50%;
-      color:var(--foreground);
-      background:radial-gradient(circle at 35% 26%, var(--background), color-mix(in srgb, var(--background) 78%, var(--orange)) 66%, var(--muted));
-      border:2px solid color-mix(in srgb, var(--orange) 65%, var(--foreground));
-      box-shadow:inset 0 0 0 2px var(--background);
+      inline-size:clamp(2.3rem,8vw,3.15rem); aspect-ratio:1; border-radius:50%;
+      color:#3b1c10; font-weight:bold; text-shadow:0 1px #ffe7b7;
+      background:radial-gradient(circle at 30% 22%,#ffe4af,#e8ab67 47%,#ad6137 88%);
+      border:2px solid #df9f60;
+      box-shadow:0 3px 0 #82452b,0 5px 5px #120a07aa,inset 0 0 0 2px #a45430,inset 0 1px 4px #fff0c2;
       font-family:Georgia,serif; font-variant-numeric:tabular-nums;
     }
     #falsche-muenze .muenze-praegung::before {
@@ -78,15 +85,33 @@
   </header>
   <div class="ablauf" data-spiel>
     <p><strong data-rest>3 von 3 Wägungen übrig</strong></p>
-    <svg class="waage" viewBox="0 0 300 91" aria-hidden="true">
-      <path d="M120 84h60m-30 0V31" fill="none" stroke="currentColor" stroke-width="2"/>
-      <g class="balken">
-        <path d="M44 31h212M55 31l-14 27h28L55 31m190 0-14 27h28l-14-27" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M32 58h46q-6 13-23 13T32 58m190 0h46q-6 13-23 13t-23-13" fill="var(--muted)" stroke="currentColor" stroke-width="2"/>
-      </g>
-      <circle cx="150" cy="31" r="4" fill="currentColor"/>
-    </svg>
-    <p class="text-small waagenstand" data-stand aria-live="polite">Waage bereit</p>
+    <div class="wiegetisch">
+      <svg class="waage" viewBox="0 0 300 111" aria-hidden="true">
+        <defs>
+          <linearGradient id="messing" x2="0%" y2="100%">
+            <stop stop-color="#fff1bb"/><stop offset=".33" stop-color="#dba959"/>
+            <stop offset=".68" stop-color="#8d5427"/><stop offset="1" stop-color="#efc07a"/>
+          </linearGradient>
+          <linearGradient id="saeule">
+            <stop stop-color="#75411f"/><stop offset=".46" stop-color="#f9d68d"/><stop offset="1" stop-color="#92592b"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="150" cy="102" rx="62" ry="6" fill="#180e09" opacity=".65"/>
+        <path d="M100 98 Q104 91 121 91 H179 Q196 91 200 98 L200 101 H100Z" fill="url(#messing)" stroke="#764421"/>
+        <path d="M137 91 C149 79 143 61 146 29 Q149 20 154 29 C157 61 151 79 163 91Z" fill="url(#saeule)" stroke="#784c25"/>
+        <circle cx="150" cy="22" r="5" fill="url(#messing)" stroke="#885a30"/>
+        <g class="balken">
+          <path d="M54 41 Q105 36 150 40 Q195 36 246 41 L246 45 Q197 43 150 47 Q103 43 54 45Z" fill="url(#messing)" stroke="#a16b35"/>
+          <path d="M55 44 L37 73 M55 44 L73 73 M245 44 L227 73 M245 44 L263 73" fill="none" stroke="#e5bd78" stroke-width="1.3"/>
+          <path d="M28 73 H82 Q76 85 55 86 Q34 85 28 73 M218 73 H272 Q266 85 245 86 Q224 85 218 73" fill="url(#messing)" stroke="#6d3d20"/>
+          <ellipse cx="55" cy="73" rx="27" ry="3" fill="#956537" stroke="#f6d694"/>
+          <ellipse cx="245" cy="73" rx="27" ry="3" fill="#956537" stroke="#f6d694"/>
+        </g>
+        <circle cx="150" cy="42" r="7" fill="url(#messing)" stroke="#704422"/>
+        <circle cx="150" cy="42" r="2" fill="#6d431f"/>
+      </svg>
+      <p class="text-small waagenstand" data-stand aria-live="polite">Waage bereit</p>
+    </div>
     <div class="schalen">
       <div class="card"><strong>Linke Schale</strong><span data-links>Leer</span></div>
       <div class="card"><strong>Rechte Schale</strong><span data-rechts>Leer</span></div>
