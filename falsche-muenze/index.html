@@ -175,7 +175,7 @@
     coin:[[1480,0,.09],[2290,.015,.07]],
     scale:[[185,0,.19],[270,.035,.14]],
     lock:[[130,0,.17],[90,.09,.18]],
-    win:[[523,0,.27],[659,.13,.27],[784,.26,.39]]
+    win:[[523,0,.20],[659,.20,.20],[784,.40,.20],[1047,.60,.64],[784,1.32,.18],[1047,1.52,.76]]
   };
   function setSound(active) {
     soundEnabled = active;
@@ -197,7 +197,7 @@
       const start = audio.currentTime + offset;
       const tone = audio.createOscillator();
       const envelope = audio.createGain();
-      tone.type = 'sine';
+      tone.type = name === 'win' ? 'sawtooth' : 'sine';
       tone.frequency.value = frequency;
       envelope.gain.setValueAtTime(.0001, start);
       envelope.gain.exponentialRampToValueAtTime(.1, start + .008);
