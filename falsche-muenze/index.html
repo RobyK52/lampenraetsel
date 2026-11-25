@@ -20,6 +20,7 @@
   .form-label { display:grid; gap:.2rem }
   .text-small { font-size:.875rem }
   .muenzen .btn { position:relative; display:grid; place-items:center; padding:.45rem .2rem; background:linear-gradient(#38251d,#4b3227); border-color:#7a5742; box-shadow:inset 0 2px 5px #1b100dc9,0 1px 0 #fff2d3 }
+  .muenzen .btn:disabled { opacity:1 }
   .muenzen .btn[aria-pressed="true"] { background:linear-gradient(#754b30,#a47442); box-shadow:inset 0 0 0 2px #eaca8b,0 1px 0 #fff2d3 }
   .muenzen .btn .text-small { position:absolute; inset:auto .13rem .08rem auto; min-width:1rem; border-radius:.2rem; background:#2b1911; color:#fff2d3; text-align:center; font-size:.72rem }
   .waage { overflow:visible }
@@ -77,7 +78,7 @@
     <div class="viz-row">
       <h2>Die falsche Münze</h2>
       <div class="viz-row">
-        <button class="btn" type="button" data-ton aria-pressed="false">Ton: aus</button>
+        <button class="btn" type="button" data-ton aria-pressed="true">Ton: an</button>
         <button class="btn" type="button" data-neu>Reset</button>
       </div>
     </div>
@@ -168,6 +169,7 @@
   const coinChoice = find('[data-auswahl]');
   const weightChoice = find('[data-gewicht]');
   const soundButton = find('[data-ton]');
+  let soundEnabled = true;
   let audio;
   const sounds = {
     coin:[[1480,0,.09],[2290,.015,.07]],
@@ -176,11 +178,21 @@
     win:[[523,0,.27],[659,.13,.27],[784,.26,.39]]
   };
   function setSound(active) {
+    soundEnabled = active;
     soundButton.setAttribute('aria-pressed', String(active));
     soundButton.textContent = active ? 'Ton: an' : 'Ton: aus';
   }
-  function playSound(name) {
-    if (soundButton.getAttribute('aria-pressed') !== 'true' || audio?.state !== 'running') return;
+  async function playSound(name) {
+    if (!soundEnabled) return;
+    try {
+      const AudioEngine = window.AudioContext || window.webkitAudioContext;
+      audio ??= new AudioEngine();
+      if (audio.state !== 'running') await audio.resume();
+    } catch {
+      setSound(false);
+      return;
+    }
+    if (!soundEnabled || audio.state !== 'running') return;
     for (const [frequency, offset, duration] of sounds[name]) {
       const start = audio.currentTime + offset;
       const tone = audio.createOscillator();
@@ -195,22 +207,9 @@
       tone.stop(start + duration);
     }
   }
-  soundButton.addEventListener('click', async () => {
-    if (soundButton.getAttribute('aria-pressed') === 'true') {
-      setSound(false);
-      return;
-    }
-    try {
-      const AudioEngine = window.AudioContext || window.webkitAudioContext;
-      audio ??= new AudioEngine();
-      await audio.resume();
-      if (audio.state !== 'running') throw Error('Audio paused');
-      setSound(true);
-      feedback.textContent = '';
-      playSound('coin');
-    } catch {
-      feedback.textContent = 'Ton ist in diesem Browserfenster nicht verfügbar.';
-    }
+  soundButton.addEventListener('click', () => {
+    setSound(!soundEnabled);
+    if (soundEnabled) playSound('coin');
   });
   const initial = (previous = -1) => {
     const draw = Math.floor(Math.random() * (previous < 0 ? 24 : 23));
@@ -279,9 +278,11 @@
     find('[data-links]').textContent = left.join(', ') || 'Leer';
     find('[data-rechts]').textContent = right.join(', ') || 'Leer';
     find('[data-anleitung]').hidden = remaining === 0;
-    coinArea.hidden = remaining === 0;
     guess.hidden = remaining !== 0;
-    buttons.forEach((_, index) => renderCoin(index));
+    buttons.forEach((button, index) => {
+      button.disabled = remaining === 0;
+      renderCoin(index);
+    });
     const block = weighBlock(left, right, remaining);
     weigh.disabled = Boolean(block);
     find('[data-bereit]').textContent = remaining < 3 && remaining > 0 && !left.length && !right.length
